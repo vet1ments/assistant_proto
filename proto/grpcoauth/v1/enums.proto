@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package grpcoauth.v1;
+
+enum GrantType {
+  GRANT_TYPE_UNSPECIFIED = 0; // 기본값
+  GRANT_TYPE_AUTHORIZATION_CODE = 1;
+  GRANT_TYPE_REFRESH_TOKEN = 2;
+}
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ADMIN = 1;
+  ROLE_USER = 2;
+}

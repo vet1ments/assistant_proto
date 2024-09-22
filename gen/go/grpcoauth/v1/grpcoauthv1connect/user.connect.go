@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "grpcoauth/v1"
+	v1 "github.com/vet1ments/grpcoauth/gen/go/grpcoauth/v1"
 	http "net/http"
 	strings "strings"
 )

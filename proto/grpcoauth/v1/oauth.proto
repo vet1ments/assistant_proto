@@ -84,6 +84,15 @@ message GetTokenResponse {
   repeated string scope = 6;
 }
 
+message GetAccessTokenInfoRequest {
+  string token = 1;
+}
+message GetAccessTokenInfoResponse {
+  string id = 1; // 앱 회원 아이디
+  string app_id = 2;
+  int64 expires_id = 3;
+}
+
 service OauthService {
   rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
   rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
@@ -94,4 +103,5 @@ service OauthService {
 
   rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse);
   rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
+  rpc GetAccessTokenInfo(GetAccessTokenInfoRequest) returns (GetAccessTokenInfoResponse);
 }

@@ -3,10 +3,11 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: github.com/vet1ments/grpcoauth/gen/go
+      value: github.com/vet1ments/grpcoauth
   disable:
     - file_option: go_package_prefix
       module: buf.build/bufbuild/protovalidate
+
 plugins:
   #python
   - local: protoc-gen-grpclib_python # async stub
@@ -28,6 +29,8 @@ plugins:
   - remote: buf.build/grpc/go
     out: gen/go
     opt: paths=source_relative
+
+
 
 inputs:
   - directory: proto

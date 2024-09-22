@@ -1,4 +1,4 @@
-module github.com/vet1ments/grpcoauth/gen/go/grpcoauth/grpcoauthv1
+module github.com/vet1ments/grpcoauth/gen/go/grpcoauth/v1/grpcoauthv1
 
 go 1.23.1
 

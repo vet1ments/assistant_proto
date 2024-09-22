@@ -33,10 +33,10 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// UserServiceGetUserProcedure is the fully-qualified name of the UserService's GetUser RPC.
-	UserServiceGetUserProcedure = "/grpcoauth.v1.UserService/GetUser"
 	// UserServiceCreateUserProcedure is the fully-qualified name of the UserService's CreateUser RPC.
 	UserServiceCreateUserProcedure = "/grpcoauth.v1.UserService/CreateUser"
+	// UserServiceGetUserProcedure is the fully-qualified name of the UserService's GetUser RPC.
+	UserServiceGetUserProcedure = "/grpcoauth.v1.UserService/GetUser"
 	// UserServiceGetUserByTokenProcedure is the fully-qualified name of the UserService's
 	// GetUserByToken RPC.
 	UserServiceGetUserByTokenProcedure = "/grpcoauth.v1.UserService/GetUserByToken"
@@ -48,16 +48,16 @@ const (
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
 	userServiceServiceDescriptor                  = v1.File_grpcoauth_v1_user_proto.Services().ByName("UserService")
-	userServiceGetUserMethodDescriptor            = userServiceServiceDescriptor.Methods().ByName("GetUser")
 	userServiceCreateUserMethodDescriptor         = userServiceServiceDescriptor.Methods().ByName("CreateUser")
+	userServiceGetUserMethodDescriptor            = userServiceServiceDescriptor.Methods().ByName("GetUser")
 	userServiceGetUserByTokenMethodDescriptor     = userServiceServiceDescriptor.Methods().ByName("GetUserByToken")
 	userServiceGetUserListByTokenMethodDescriptor = userServiceServiceDescriptor.Methods().ByName("GetUserListByToken")
 )
 
 // UserServiceClient is a client for the grpcoauth.v1.UserService service.
 type UserServiceClient interface {
-	GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error)
 	CreateUser(context.Context, *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.CreateUserResponse], error)
+	GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error)
 	GetUserByToken(context.Context, *connect.Request[v1.GetUserByTokenRequest]) (*connect.Response[v1.GetUserByTokenResponse], error)
 	GetUserListByToken(context.Context, *connect.Request[v1.GetUserListByTokenRequest]) (*connect.Response[v1.GetUserListByTokenResponse], error)
 }
@@ -72,16 +72,16 @@ type UserServiceClient interface {
 func NewUserServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) UserServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &userServiceClient{
-		getUser: connect.NewClient[v1.GetUserRequest, v1.GetUserResponse](
-			httpClient,
-			baseURL+UserServiceGetUserProcedure,
-			connect.WithSchema(userServiceGetUserMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
 		createUser: connect.NewClient[v1.CreateUserRequest, v1.CreateUserResponse](
 			httpClient,
 			baseURL+UserServiceCreateUserProcedure,
 			connect.WithSchema(userServiceCreateUserMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		getUser: connect.NewClient[v1.GetUserRequest, v1.GetUserResponse](
+			httpClient,
+			baseURL+UserServiceGetUserProcedure,
+			connect.WithSchema(userServiceGetUserMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		getUserByToken: connect.NewClient[v1.GetUserByTokenRequest, v1.GetUserByTokenResponse](
@@ -101,20 +101,20 @@ func NewUserServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 
 // userServiceClient implements UserServiceClient.
 type userServiceClient struct {
-	getUser            *connect.Client[v1.GetUserRequest, v1.GetUserResponse]
 	createUser         *connect.Client[v1.CreateUserRequest, v1.CreateUserResponse]
+	getUser            *connect.Client[v1.GetUserRequest, v1.GetUserResponse]
 	getUserByToken     *connect.Client[v1.GetUserByTokenRequest, v1.GetUserByTokenResponse]
 	getUserListByToken *connect.Client[v1.GetUserListByTokenRequest, v1.GetUserListByTokenResponse]
-}
-
-// GetUser calls grpcoauth.v1.UserService.GetUser.
-func (c *userServiceClient) GetUser(ctx context.Context, req *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error) {
-	return c.getUser.CallUnary(ctx, req)
 }
 
 // CreateUser calls grpcoauth.v1.UserService.CreateUser.
 func (c *userServiceClient) CreateUser(ctx context.Context, req *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.CreateUserResponse], error) {
 	return c.createUser.CallUnary(ctx, req)
+}
+
+// GetUser calls grpcoauth.v1.UserService.GetUser.
+func (c *userServiceClient) GetUser(ctx context.Context, req *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error) {
+	return c.getUser.CallUnary(ctx, req)
 }
 
 // GetUserByToken calls grpcoauth.v1.UserService.GetUserByToken.
@@ -129,8 +129,8 @@ func (c *userServiceClient) GetUserListByToken(ctx context.Context, req *connect
 
 // UserServiceHandler is an implementation of the grpcoauth.v1.UserService service.
 type UserServiceHandler interface {
-	GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error)
 	CreateUser(context.Context, *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.CreateUserResponse], error)
+	GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error)
 	GetUserByToken(context.Context, *connect.Request[v1.GetUserByTokenRequest]) (*connect.Response[v1.GetUserByTokenResponse], error)
 	GetUserListByToken(context.Context, *connect.Request[v1.GetUserListByTokenRequest]) (*connect.Response[v1.GetUserListByTokenResponse], error)
 }
@@ -141,16 +141,16 @@ type UserServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewUserServiceHandler(svc UserServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	userServiceGetUserHandler := connect.NewUnaryHandler(
-		UserServiceGetUserProcedure,
-		svc.GetUser,
-		connect.WithSchema(userServiceGetUserMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
 	userServiceCreateUserHandler := connect.NewUnaryHandler(
 		UserServiceCreateUserProcedure,
 		svc.CreateUser,
 		connect.WithSchema(userServiceCreateUserMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	userServiceGetUserHandler := connect.NewUnaryHandler(
+		UserServiceGetUserProcedure,
+		svc.GetUser,
+		connect.WithSchema(userServiceGetUserMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	userServiceGetUserByTokenHandler := connect.NewUnaryHandler(
@@ -167,10 +167,10 @@ func NewUserServiceHandler(svc UserServiceHandler, opts ...connect.HandlerOption
 	)
 	return "/grpcoauth.v1.UserService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case UserServiceGetUserProcedure:
-			userServiceGetUserHandler.ServeHTTP(w, r)
 		case UserServiceCreateUserProcedure:
 			userServiceCreateUserHandler.ServeHTTP(w, r)
+		case UserServiceGetUserProcedure:
+			userServiceGetUserHandler.ServeHTTP(w, r)
 		case UserServiceGetUserByTokenProcedure:
 			userServiceGetUserByTokenHandler.ServeHTTP(w, r)
 		case UserServiceGetUserListByTokenProcedure:
@@ -184,12 +184,12 @@ func NewUserServiceHandler(svc UserServiceHandler, opts ...connect.HandlerOption
 // UnimplementedUserServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedUserServiceHandler struct{}
 
-func (UnimplementedUserServiceHandler) GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("grpcoauth.v1.UserService.GetUser is not implemented"))
-}
-
 func (UnimplementedUserServiceHandler) CreateUser(context.Context, *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.CreateUserResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("grpcoauth.v1.UserService.CreateUser is not implemented"))
+}
+
+func (UnimplementedUserServiceHandler) GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.GetUserResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("grpcoauth.v1.UserService.GetUser is not implemented"))
 }
 
 func (UnimplementedUserServiceHandler) GetUserByToken(context.Context, *connect.Request[v1.GetUserByTokenRequest]) (*connect.Response[v1.GetUserByTokenResponse], error) {

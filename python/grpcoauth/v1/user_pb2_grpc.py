@@ -14,15 +14,15 @@ class UserServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetUser = channel.unary_unary(
-                '/grpcoauth.v1.UserService/GetUser',
-                request_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.FromString,
-                _registered_method=True)
         self.CreateUser = channel.unary_unary(
                 '/grpcoauth.v1.UserService/CreateUser',
                 request_serializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserRequest.SerializeToString,
                 response_deserializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserResponse.FromString,
+                _registered_method=True)
+        self.GetUser = channel.unary_unary(
+                '/grpcoauth.v1.UserService/GetUser',
+                request_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.FromString,
                 _registered_method=True)
         self.GetUserByToken = channel.unary_unary(
                 '/grpcoauth.v1.UserService/GetUserByToken',
@@ -39,13 +39,13 @@ class UserServiceStub(object):
 class UserServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def GetUser(self, request, context):
+    def CreateUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateUser(self, request, context):
+    def GetUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -66,15 +66,15 @@ class UserServiceServicer(object):
 
 def add_UserServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetUser': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetUser,
-                    request_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.SerializeToString,
-            ),
             'CreateUser': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateUser,
                     request_deserializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserRequest.FromString,
                     response_serializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserResponse.SerializeToString,
+            ),
+            'GetUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUser,
+                    request_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.SerializeToString,
             ),
             'GetUserByToken': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserByToken,
@@ -98,33 +98,6 @@ class UserService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetUser(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/grpcoauth.v1.UserService/GetUser',
-            grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
     def CreateUser(request,
             target,
             options=(),
@@ -141,6 +114,33 @@ class UserService(object):
             '/grpcoauth.v1.UserService/CreateUser',
             grpcoauth_dot_v1_dot_user__pb2.CreateUserRequest.SerializeToString,
             grpcoauth_dot_v1_dot_user__pb2.CreateUserResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/grpcoauth.v1.UserService/GetUser',
+            grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.SerializeToString,
+            grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.FromString,
             options,
             channel_credentials,
             insecure,

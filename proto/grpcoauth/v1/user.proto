@@ -9,7 +9,7 @@ message User {
   string id = 1 [(buf.validate.field).string.pattern = "^[a-z0-9]{24}$"];
   string name = 2 [(buf.validate.field).string.min_len = 2, (buf.validate.field).string.max_len = 20];
   string phone_number = 3 [(buf.validate.field).string.pattern = "^010[0-9]{4}[0-9]{4}$"];
-  string nickname = 4 [(buf.validate.field).string.min_len = 2, (buf.validate.field).string.max_len = 20];
+  string nickname = 4 [(buf.validate.field).string.max_len = 20];
   string thumbnail = 5;
 }
 
@@ -46,8 +46,8 @@ message GetUserListByTokenResponse {
 }
 
 service UserService {
-  rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc GetUserByToken(GetUserByTokenRequest) returns (GetUserByTokenResponse);
   rpc GetUserListByToken(GetUserListByTokenRequest) returns (GetUserListByTokenResponse);
 }

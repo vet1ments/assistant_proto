@@ -16,11 +16,11 @@ import grpcoauth.v1.user_pb2
 class UserServiceBase(abc.ABC):
 
     @abc.abstractmethod
-    async def GetUser(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.GetUserRequest, grpcoauth.v1.user_pb2.GetUserResponse]') -> None:
+    async def CreateUser(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.CreateUserRequest, grpcoauth.v1.user_pb2.CreateUserResponse]') -> None:
         pass
 
     @abc.abstractmethod
-    async def CreateUser(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.CreateUserRequest, grpcoauth.v1.user_pb2.CreateUserResponse]') -> None:
+    async def GetUser(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.GetUserRequest, grpcoauth.v1.user_pb2.GetUserResponse]') -> None:
         pass
 
     @abc.abstractmethod
@@ -33,17 +33,17 @@ class UserServiceBase(abc.ABC):
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/grpcoauth.v1.UserService/GetUser': grpclib.const.Handler(
-                self.GetUser,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.user_pb2.GetUserRequest,
-                grpcoauth.v1.user_pb2.GetUserResponse,
-            ),
             '/grpcoauth.v1.UserService/CreateUser': grpclib.const.Handler(
                 self.CreateUser,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 grpcoauth.v1.user_pb2.CreateUserRequest,
                 grpcoauth.v1.user_pb2.CreateUserResponse,
+            ),
+            '/grpcoauth.v1.UserService/GetUser': grpclib.const.Handler(
+                self.GetUser,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                grpcoauth.v1.user_pb2.GetUserRequest,
+                grpcoauth.v1.user_pb2.GetUserResponse,
             ),
             '/grpcoauth.v1.UserService/GetUserByToken': grpclib.const.Handler(
                 self.GetUserByToken,
@@ -63,17 +63,17 @@ class UserServiceBase(abc.ABC):
 class UserServiceStub:
 
     def __init__(self, channel: grpclib.client.Channel) -> None:
-        self.GetUser = grpclib.client.UnaryUnaryMethod(
-            channel,
-            '/grpcoauth.v1.UserService/GetUser',
-            grpcoauth.v1.user_pb2.GetUserRequest,
-            grpcoauth.v1.user_pb2.GetUserResponse,
-        )
         self.CreateUser = grpclib.client.UnaryUnaryMethod(
             channel,
             '/grpcoauth.v1.UserService/CreateUser',
             grpcoauth.v1.user_pb2.CreateUserRequest,
             grpcoauth.v1.user_pb2.CreateUserResponse,
+        )
+        self.GetUser = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/grpcoauth.v1.UserService/GetUser',
+            grpcoauth.v1.user_pb2.GetUserRequest,
+            grpcoauth.v1.user_pb2.GetUserResponse,
         )
         self.GetUserByToken = grpclib.client.UnaryUnaryMethod(
             channel,

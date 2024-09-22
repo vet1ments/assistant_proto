@@ -6,9 +6,8 @@ import typing as t
 async def main():
     async with Channel('127.0.0.1', 9000) as channel:
         client = pb2_grpc.UserServiceStub(channel)
-        res = await client.GetUser(pb2.GetUserRequest(id="abc12345678945612345qqqq"))
-        res = t.cast(pb2.GetUserResponse, res)
-        print(res.user.name, 'we')
+        res = await client.GetUser(pb2.GetUserRequest(id="abc1234567894561235qqqq"))
+        print(type(res.user.id))
 
 if __name__ == '__main__':
     asyncio.run(main())

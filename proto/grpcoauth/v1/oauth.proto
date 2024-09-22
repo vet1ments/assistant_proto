@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package grpcoauth.v1;
+
+import "grpcoauth/v1/enums.proto";
+
+message OauthApp {
+  grpcoauth.v1.RoleType role = 1;
+  string id = 2;
+  string name = 3;
+  string redirect_uri = 4;
+}
+
+message OauthAppUser {
+  string id = 1;
+}
+
+message GetOauthAppTokenInfoRequest {
+  string token = 1;
+}
+
+message GetOauthAppTokenInfoResponse {
+  OauthApp app = 1;
+}
+
+message GetOauthAppUserRequest {
+  string token = 1; // access token
+}
+message GetOauthAppUserResponse {
+  OauthApp user = 1;
+}
+message GetOauthAppUserListRequest {
+  string token = 1; // admin token
+}
+message GetOauthAppUserListResponse {
+  repeated OauthApp users = 1;
+}
+message CreateOauthAdminAppRequest {
+  string name = 1;
+  string redirect_uri = 2;
+}
+message CreateOauthAdminAppResponse {
+  grpcoauth.v1.ResponseType response = 1;
+  string description = 2;
+}
+message CreateOauthUserAppRequest {
+  string name = 1;
+  string redirect_uri = 2;
+}
+message CreateOauthUserAppResponse {
+  grpcoauth.v1.ResponseType response = 1;
+  string description = 2;
+}
+
+message GetAuthorizeCodeRequest {
+  LoginType login_type = 1;
+  message UserInfo {
+    string email = 2;
+    string pw = 3;
+  }
+  UserInfo user_info = 4;
+  string code = 5;
+  string state = 6;
+}
+
+message GetAuthorizeCodeResponse {
+  string code = 1;
+  string state = 2;
+}
+message GetTokenRequest {
+  grpcoauth.v1.GrantType grant_type = 1;
+  string client_id = 2;
+  string redirect_uri = 3;
+  string code = 4;
+  string client_secret = 5;
+  string refresh_token = 6;
+}
+message GetTokenResponse {
+  grpcoauth.v1.TokenType token_type = 1;
+  string access_token = 2;
+  int64 expires_id = 3;
+  string refresh_token = 4;
+  int64 refresh_token_expires_in = 5;
+  repeated string scope = 6;
+}
+
+service OauthService {
+  rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
+  rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
+  rpc GetOauthAppUserList(GetOauthAppUserListRequest) returns (GetOauthAppUserListResponse);
+
+  rpc CreateOauthAdminApp(CreateOauthAdminAppRequest) returns (CreateOauthAdminAppResponse);
+  rpc CreateOauthUserApp(CreateOauthUserAppRequest) returns (CreateOauthUserAppResponse);
+
+  rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse);
+  rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
+}

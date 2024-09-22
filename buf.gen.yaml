@@ -3,7 +3,7 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: github.com/vet1ments/grpcoauth
+      value: github.com/vet1ments/grpcoauth/go
   disable:
     - file_option: go_package_prefix
       module: buf.build/bufbuild/protovalidate
@@ -11,23 +11,23 @@ managed:
 plugins:
   #python
   - local: protoc-gen-grpclib_python # async stub
-    out: gen/python
+    out: python
   - remote: buf.build/protocolbuffers/python:v28.2
-    out: gen/python
+    out: python
   - remote: buf.build/protocolbuffers/pyi:v28.2
-    out: gen/python
+    out: python
   - remote: buf.build/grpc/python
-    out: gen/python
+    out: python
 
   # go
   - remote: buf.build/protocolbuffers/go
-    out: gen/go
+    out: go
     opt: paths=source_relative
   - remote: buf.build/connectrpc/go
-    out: gen/go
+    out: go
     opt: paths=source_relative
   - remote: buf.build/grpc/go
-    out: gen/go
+    out: go
     opt: paths=source_relative
 
 

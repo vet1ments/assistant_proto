@@ -122,19 +122,14 @@ service OauthService {
 
 
 message CallbackRequest{
+  LoginType type = 3;
   string code = 1;
   string state = 2;
 }
 service OauthCallbackService {
   rpc Callback(CallbackRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      get: "/callback/native"
-      additional_bindings {
-        get: "/callback/kakao"
-      }
-      additional_bindings {
-        get: "/callback/naver"
-      }
+      get: "/callback/{type}"
     };
   }
 }

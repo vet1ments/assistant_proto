@@ -31,56 +31,110 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_OauthCallbackService_NativeCallback_0(ctx context.Context, marshaler runtime.Marshaler, client OauthCallbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq NativeCallbackRequest
+var (
+	filter_OauthCallbackService_Callback_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_OauthCallbackService_Callback_0(ctx context.Context, marshaler runtime.Marshaler, client OauthCallbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CallbackRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.NativeCallback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_OauthCallbackService_Callback_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.Callback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_OauthCallbackService_NativeCallback_0(ctx context.Context, marshaler runtime.Marshaler, server OauthCallbackServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq NativeCallbackRequest
+func local_request_OauthCallbackService_Callback_0(ctx context.Context, marshaler runtime.Marshaler, server OauthCallbackServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CallbackRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := server.NativeCallback(ctx, &protoReq)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_OauthCallbackService_Callback_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.Callback(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_OauthCallbackService_KakaoCallback_0(ctx context.Context, marshaler runtime.Marshaler, client OauthCallbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq KakaoCallbackRequest
+var (
+	filter_OauthCallbackService_Callback_1 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_OauthCallbackService_Callback_1(ctx context.Context, marshaler runtime.Marshaler, client OauthCallbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CallbackRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.KakaoCallback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_OauthCallbackService_Callback_1); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.Callback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_OauthCallbackService_KakaoCallback_0(ctx context.Context, marshaler runtime.Marshaler, server OauthCallbackServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq KakaoCallbackRequest
+func local_request_OauthCallbackService_Callback_1(ctx context.Context, marshaler runtime.Marshaler, server OauthCallbackServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CallbackRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := server.KakaoCallback(ctx, &protoReq)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_OauthCallbackService_Callback_1); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.Callback(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_OauthCallbackService_NaverCallback_0(ctx context.Context, marshaler runtime.Marshaler, client OauthCallbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq NaverCallbackRequest
+var (
+	filter_OauthCallbackService_Callback_2 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_OauthCallbackService_Callback_2(ctx context.Context, marshaler runtime.Marshaler, client OauthCallbackServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CallbackRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.NaverCallback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_OauthCallbackService_Callback_2); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.Callback(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_OauthCallbackService_NaverCallback_0(ctx context.Context, marshaler runtime.Marshaler, server OauthCallbackServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq NaverCallbackRequest
+func local_request_OauthCallbackService_Callback_2(ctx context.Context, marshaler runtime.Marshaler, server OauthCallbackServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CallbackRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := server.NaverCallback(ctx, &protoReq)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_OauthCallbackService_Callback_2); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.Callback(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -92,7 +146,7 @@ func local_request_OauthCallbackService_NaverCallback_0(ctx context.Context, mar
 // GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterOauthCallbackServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OauthCallbackServiceServer) error {
 
-	mux.Handle("GET", pattern_OauthCallbackService_NativeCallback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OauthCallbackService_Callback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -100,12 +154,12 @@ func RegisterOauthCallbackServiceHandlerServer(ctx context.Context, mux *runtime
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/NativeCallback", runtime.WithHTTPPathPattern("/callback/native"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/Callback", runtime.WithHTTPPathPattern("/callback/native"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OauthCallbackService_NativeCallback_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_OauthCallbackService_Callback_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -113,11 +167,11 @@ func RegisterOauthCallbackServiceHandlerServer(ctx context.Context, mux *runtime
 			return
 		}
 
-		forward_OauthCallbackService_NativeCallback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthCallbackService_Callback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OauthCallbackService_KakaoCallback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OauthCallbackService_Callback_1, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -125,12 +179,12 @@ func RegisterOauthCallbackServiceHandlerServer(ctx context.Context, mux *runtime
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/KakaoCallback", runtime.WithHTTPPathPattern("/callback/kakao"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/Callback", runtime.WithHTTPPathPattern("/callback/kakao"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OauthCallbackService_KakaoCallback_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_OauthCallbackService_Callback_1(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -138,11 +192,11 @@ func RegisterOauthCallbackServiceHandlerServer(ctx context.Context, mux *runtime
 			return
 		}
 
-		forward_OauthCallbackService_KakaoCallback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthCallbackService_Callback_1(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OauthCallbackService_NaverCallback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OauthCallbackService_Callback_2, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -150,12 +204,12 @@ func RegisterOauthCallbackServiceHandlerServer(ctx context.Context, mux *runtime
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/NaverCallback", runtime.WithHTTPPathPattern("/callback/naver"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/Callback", runtime.WithHTTPPathPattern("/callback/naver"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OauthCallbackService_NaverCallback_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_OauthCallbackService_Callback_2(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -163,7 +217,7 @@ func RegisterOauthCallbackServiceHandlerServer(ctx context.Context, mux *runtime
 			return
 		}
 
-		forward_OauthCallbackService_NaverCallback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthCallbackService_Callback_2(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -208,69 +262,69 @@ func RegisterOauthCallbackServiceHandler(ctx context.Context, mux *runtime.Serve
 // "OauthCallbackServiceClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterOauthCallbackServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OauthCallbackServiceClient) error {
 
-	mux.Handle("GET", pattern_OauthCallbackService_NativeCallback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OauthCallbackService_Callback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/NativeCallback", runtime.WithHTTPPathPattern("/callback/native"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/Callback", runtime.WithHTTPPathPattern("/callback/native"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OauthCallbackService_NativeCallback_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_OauthCallbackService_Callback_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OauthCallbackService_NativeCallback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthCallbackService_Callback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OauthCallbackService_KakaoCallback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OauthCallbackService_Callback_1, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/KakaoCallback", runtime.WithHTTPPathPattern("/callback/kakao"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/Callback", runtime.WithHTTPPathPattern("/callback/kakao"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OauthCallbackService_KakaoCallback_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_OauthCallbackService_Callback_1(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OauthCallbackService_KakaoCallback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthCallbackService_Callback_1(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OauthCallbackService_NaverCallback_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OauthCallbackService_Callback_2, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/NaverCallback", runtime.WithHTTPPathPattern("/callback/naver"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.OauthCallbackService/Callback", runtime.WithHTTPPathPattern("/callback/naver"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OauthCallbackService_NaverCallback_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_OauthCallbackService_Callback_2(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OauthCallbackService_NaverCallback_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthCallbackService_Callback_2(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -278,17 +332,17 @@ func RegisterOauthCallbackServiceHandlerClient(ctx context.Context, mux *runtime
 }
 
 var (
-	pattern_OauthCallbackService_NativeCallback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"callback", "native"}, ""))
+	pattern_OauthCallbackService_Callback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"callback", "native"}, ""))
 
-	pattern_OauthCallbackService_KakaoCallback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"callback", "kakao"}, ""))
+	pattern_OauthCallbackService_Callback_1 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"callback", "kakao"}, ""))
 
-	pattern_OauthCallbackService_NaverCallback_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"callback", "naver"}, ""))
+	pattern_OauthCallbackService_Callback_2 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"callback", "naver"}, ""))
 )
 
 var (
-	forward_OauthCallbackService_NativeCallback_0 = runtime.ForwardResponseMessage
+	forward_OauthCallbackService_Callback_0 = runtime.ForwardResponseMessage
 
-	forward_OauthCallbackService_KakaoCallback_0 = runtime.ForwardResponseMessage
+	forward_OauthCallbackService_Callback_1 = runtime.ForwardResponseMessage
 
-	forward_OauthCallbackService_NaverCallback_0 = runtime.ForwardResponseMessage
+	forward_OauthCallbackService_Callback_2 = runtime.ForwardResponseMessage
 )

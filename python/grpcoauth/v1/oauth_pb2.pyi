@@ -182,26 +182,10 @@ class GetAuthorizeUrlResponse(_message.Message):
     urls: _containers.RepeatedCompositeFieldContainer[GetAuthorizeUrlResponse.AuthorizeUrlInfo]
     def __init__(self, urls: _Optional[_Iterable[_Union[GetAuthorizeUrlResponse.AuthorizeUrlInfo, _Mapping]]] = ...) -> None: ...
 
-class NativeCallbackRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class NativeCallbackResponse(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class KakaoCallbackRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class KakaoCallbackResponse(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class NaverCallbackRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class NaverCallbackResponse(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+class CallbackRequest(_message.Message):
+    __slots__ = ("code", "state")
+    CODE_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    code: str
+    state: str
+    def __init__(self, code: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...

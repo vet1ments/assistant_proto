@@ -431,39 +431,17 @@ class OauthCallbackServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.NativeCallback = channel.unary_unary(
-                '/grpcoauth.v1.OauthCallbackService/NativeCallback',
-                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.NativeCallbackRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.NativeCallbackResponse.FromString,
-                _registered_method=True)
-        self.KakaoCallback = channel.unary_unary(
-                '/grpcoauth.v1.OauthCallbackService/KakaoCallback',
-                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackResponse.FromString,
-                _registered_method=True)
-        self.NaverCallback = channel.unary_unary(
-                '/grpcoauth.v1.OauthCallbackService/NaverCallback',
-                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.NaverCallbackRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.NaverCallbackResponse.FromString,
+        self.Callback = channel.unary_unary(
+                '/grpcoauth.v1.OauthCallbackService/Callback',
+                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.CallbackRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
 
 
 class OauthCallbackServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def NativeCallback(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def KakaoCallback(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def NaverCallback(self, request, context):
+    def Callback(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -472,20 +450,10 @@ class OauthCallbackServiceServicer(object):
 
 def add_OauthCallbackServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'NativeCallback': grpc.unary_unary_rpc_method_handler(
-                    servicer.NativeCallback,
-                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.NativeCallbackRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.NativeCallbackResponse.SerializeToString,
-            ),
-            'KakaoCallback': grpc.unary_unary_rpc_method_handler(
-                    servicer.KakaoCallback,
-                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackResponse.SerializeToString,
-            ),
-            'NaverCallback': grpc.unary_unary_rpc_method_handler(
-                    servicer.NaverCallback,
-                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.NaverCallbackRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.NaverCallbackResponse.SerializeToString,
+            'Callback': grpc.unary_unary_rpc_method_handler(
+                    servicer.Callback,
+                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.CallbackRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -499,7 +467,7 @@ class OauthCallbackService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def NativeCallback(request,
+    def Callback(request,
             target,
             options=(),
             channel_credentials=None,
@@ -512,63 +480,9 @@ class OauthCallbackService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/grpcoauth.v1.OauthCallbackService/NativeCallback',
-            grpcoauth_dot_v1_dot_oauth__pb2.NativeCallbackRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_oauth__pb2.NativeCallbackResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def KakaoCallback(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/grpcoauth.v1.OauthCallbackService/KakaoCallback',
-            grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def NaverCallback(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/grpcoauth.v1.OauthCallbackService/NaverCallback',
-            grpcoauth_dot_v1_dot_oauth__pb2.NaverCallbackRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_oauth__pb2.NaverCallbackResponse.FromString,
+            '/grpcoauth.v1.OauthCallbackService/Callback',
+            grpcoauth_dot_v1_dot_oauth__pb2.CallbackRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
             insecure,

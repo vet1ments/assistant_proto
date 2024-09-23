@@ -426,18 +426,14 @@ var OauthService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OauthCallbackService_NativeCallback_FullMethodName = "/grpcoauth.v1.OauthCallbackService/NativeCallback"
-	OauthCallbackService_KakaoCallback_FullMethodName  = "/grpcoauth.v1.OauthCallbackService/KakaoCallback"
-	OauthCallbackService_NaverCallback_FullMethodName  = "/grpcoauth.v1.OauthCallbackService/NaverCallback"
+	OauthCallbackService_Callback_FullMethodName = "/grpcoauth.v1.OauthCallbackService/Callback"
 )
 
 // OauthCallbackServiceClient is the client API for OauthCallbackService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OauthCallbackServiceClient interface {
-	NativeCallback(ctx context.Context, in *NativeCallbackRequest, opts ...grpc.CallOption) (*NativeCallbackResponse, error)
-	KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error)
-	NaverCallback(ctx context.Context, in *NaverCallbackRequest, opts ...grpc.CallOption) (*NaverCallbackResponse, error)
+	Callback(ctx context.Context, in *CallbackRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type oauthCallbackServiceClient struct {
@@ -448,30 +444,10 @@ func NewOauthCallbackServiceClient(cc grpc.ClientConnInterface) OauthCallbackSer
 	return &oauthCallbackServiceClient{cc}
 }
 
-func (c *oauthCallbackServiceClient) NativeCallback(ctx context.Context, in *NativeCallbackRequest, opts ...grpc.CallOption) (*NativeCallbackResponse, error) {
+func (c *oauthCallbackServiceClient) Callback(ctx context.Context, in *CallbackRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NativeCallbackResponse)
-	err := c.cc.Invoke(ctx, OauthCallbackService_NativeCallback_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *oauthCallbackServiceClient) KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(KakaoCallbackResponse)
-	err := c.cc.Invoke(ctx, OauthCallbackService_KakaoCallback_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *oauthCallbackServiceClient) NaverCallback(ctx context.Context, in *NaverCallbackRequest, opts ...grpc.CallOption) (*NaverCallbackResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NaverCallbackResponse)
-	err := c.cc.Invoke(ctx, OauthCallbackService_NaverCallback_FullMethodName, in, out, cOpts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, OauthCallbackService_Callback_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -482,9 +458,7 @@ func (c *oauthCallbackServiceClient) NaverCallback(ctx context.Context, in *Nave
 // All implementations must embed UnimplementedOauthCallbackServiceServer
 // for forward compatibility.
 type OauthCallbackServiceServer interface {
-	NativeCallback(context.Context, *NativeCallbackRequest) (*NativeCallbackResponse, error)
-	KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error)
-	NaverCallback(context.Context, *NaverCallbackRequest) (*NaverCallbackResponse, error)
+	Callback(context.Context, *CallbackRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedOauthCallbackServiceServer()
 }
 
@@ -495,14 +469,8 @@ type OauthCallbackServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedOauthCallbackServiceServer struct{}
 
-func (UnimplementedOauthCallbackServiceServer) NativeCallback(context.Context, *NativeCallbackRequest) (*NativeCallbackResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NativeCallback not implemented")
-}
-func (UnimplementedOauthCallbackServiceServer) KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method KakaoCallback not implemented")
-}
-func (UnimplementedOauthCallbackServiceServer) NaverCallback(context.Context, *NaverCallbackRequest) (*NaverCallbackResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NaverCallback not implemented")
+func (UnimplementedOauthCallbackServiceServer) Callback(context.Context, *CallbackRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Callback not implemented")
 }
 func (UnimplementedOauthCallbackServiceServer) mustEmbedUnimplementedOauthCallbackServiceServer() {}
 func (UnimplementedOauthCallbackServiceServer) testEmbeddedByValue()                              {}
@@ -525,56 +493,20 @@ func RegisterOauthCallbackServiceServer(s grpc.ServiceRegistrar, srv OauthCallba
 	s.RegisterService(&OauthCallbackService_ServiceDesc, srv)
 }
 
-func _OauthCallbackService_NativeCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NativeCallbackRequest)
+func _OauthCallbackService_Callback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CallbackRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OauthCallbackServiceServer).NativeCallback(ctx, in)
+		return srv.(OauthCallbackServiceServer).Callback(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: OauthCallbackService_NativeCallback_FullMethodName,
+		FullMethod: OauthCallbackService_Callback_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthCallbackServiceServer).NativeCallback(ctx, req.(*NativeCallbackRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _OauthCallbackService_KakaoCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(KakaoCallbackRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OauthCallbackServiceServer).KakaoCallback(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OauthCallbackService_KakaoCallback_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthCallbackServiceServer).KakaoCallback(ctx, req.(*KakaoCallbackRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _OauthCallbackService_NaverCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NaverCallbackRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OauthCallbackServiceServer).NaverCallback(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OauthCallbackService_NaverCallback_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthCallbackServiceServer).NaverCallback(ctx, req.(*NaverCallbackRequest))
+		return srv.(OauthCallbackServiceServer).Callback(ctx, req.(*CallbackRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -587,16 +519,8 @@ var OauthCallbackService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OauthCallbackServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "NativeCallback",
-			Handler:    _OauthCallbackService_NativeCallback_Handler,
-		},
-		{
-			MethodName: "KakaoCallback",
-			Handler:    _OauthCallbackService_KakaoCallback_Handler,
-		},
-		{
-			MethodName: "NaverCallback",
-			Handler:    _OauthCallbackService_NaverCallback_Handler,
+			MethodName: "Callback",
+			Handler:    _OauthCallbackService_Callback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -174,36 +174,16 @@ class OauthServiceStub:
 class OauthCallbackServiceBase(abc.ABC):
 
     @abc.abstractmethod
-    async def NativeCallback(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.NativeCallbackRequest, grpcoauth.v1.oauth_pb2.NativeCallbackResponse]') -> None:
-        pass
-
-    @abc.abstractmethod
-    async def KakaoCallback(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.KakaoCallbackRequest, grpcoauth.v1.oauth_pb2.KakaoCallbackResponse]') -> None:
-        pass
-
-    @abc.abstractmethod
-    async def NaverCallback(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.NaverCallbackRequest, grpcoauth.v1.oauth_pb2.NaverCallbackResponse]') -> None:
+    async def Callback(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.CallbackRequest, google.protobuf.empty_pb2.Empty]') -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/grpcoauth.v1.OauthCallbackService/NativeCallback': grpclib.const.Handler(
-                self.NativeCallback,
+            '/grpcoauth.v1.OauthCallbackService/Callback': grpclib.const.Handler(
+                self.Callback,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.oauth_pb2.NativeCallbackRequest,
-                grpcoauth.v1.oauth_pb2.NativeCallbackResponse,
-            ),
-            '/grpcoauth.v1.OauthCallbackService/KakaoCallback': grpclib.const.Handler(
-                self.KakaoCallback,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.oauth_pb2.KakaoCallbackRequest,
-                grpcoauth.v1.oauth_pb2.KakaoCallbackResponse,
-            ),
-            '/grpcoauth.v1.OauthCallbackService/NaverCallback': grpclib.const.Handler(
-                self.NaverCallback,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.oauth_pb2.NaverCallbackRequest,
-                grpcoauth.v1.oauth_pb2.NaverCallbackResponse,
+                grpcoauth.v1.oauth_pb2.CallbackRequest,
+                google.protobuf.empty_pb2.Empty,
             ),
         }
 
@@ -211,21 +191,9 @@ class OauthCallbackServiceBase(abc.ABC):
 class OauthCallbackServiceStub:
 
     def __init__(self, channel: grpclib.client.Channel) -> None:
-        self.NativeCallback = grpclib.client.UnaryUnaryMethod(
+        self.Callback = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/grpcoauth.v1.OauthCallbackService/NativeCallback',
-            grpcoauth.v1.oauth_pb2.NativeCallbackRequest,
-            grpcoauth.v1.oauth_pb2.NativeCallbackResponse,
-        )
-        self.KakaoCallback = grpclib.client.UnaryUnaryMethod(
-            channel,
-            '/grpcoauth.v1.OauthCallbackService/KakaoCallback',
-            grpcoauth.v1.oauth_pb2.KakaoCallbackRequest,
-            grpcoauth.v1.oauth_pb2.KakaoCallbackResponse,
-        )
-        self.NaverCallback = grpclib.client.UnaryUnaryMethod(
-            channel,
-            '/grpcoauth.v1.OauthCallbackService/NaverCallback',
-            grpcoauth.v1.oauth_pb2.NaverCallbackRequest,
-            grpcoauth.v1.oauth_pb2.NaverCallbackResponse,
+            '/grpcoauth.v1.OauthCallbackService/Callback',
+            grpcoauth.v1.oauth_pb2.CallbackRequest,
+            google.protobuf.empty_pb2.Empty,
         )

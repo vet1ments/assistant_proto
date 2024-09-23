@@ -121,36 +121,20 @@ service OauthService {
 }
 
 
-message NativeCallbackRequest {
+message CallbackRequest{
+  string code = 1;
+  string state = 2;
 }
-message NativeCallbackResponse {
-}
-
-message KakaoCallbackRequest {
-}
-message KakaoCallbackResponse {
-}
-
-message NaverCallbackRequest {
-}
-message NaverCallbackResponse {
-}
-
-
 service OauthCallbackService {
-  rpc NativeCallback(NativeCallbackRequest) returns (NativeCallbackResponse) {
+  rpc Callback(CallbackRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      get: "/callback/native",
-    };
-  }
-  rpc KakaoCallback(KakaoCallbackRequest) returns (KakaoCallbackResponse) {
-    option (google.api.http) = {
-      get: "/callback/kakao",
-    };
-  }
-  rpc NaverCallback(NaverCallbackRequest) returns (NaverCallbackResponse) {
-    option (google.api.http) = {
-      get: "/callback/naver",
+      get: "/callback/native"
+      additional_bindings {
+        get: "/callback/kakao"
+      }
+      additional_bindings {
+        get: "/callback/naver"
+      }
     };
   }
 }

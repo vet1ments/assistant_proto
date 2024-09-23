@@ -183,11 +183,9 @@ class GetAuthorizeUrlResponse(_message.Message):
     def __init__(self, urls: _Optional[_Iterable[_Union[GetAuthorizeUrlResponse.AuthorizeUrlInfo, _Mapping]]] = ...) -> None: ...
 
 class CallbackRequest(_message.Message):
-    __slots__ = ("type", "code", "state")
-    TYPE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("code", "state")
     CODE_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
-    type: _enums_pb2.LoginType
     code: str
     state: str
-    def __init__(self, type: _Optional[_Union[_enums_pb2.LoginType, str]] = ..., code: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...
+    def __init__(self, code: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...

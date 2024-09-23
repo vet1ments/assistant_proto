@@ -29,7 +29,6 @@ const (
 	OauthService_GetToken_FullMethodName             = "/grpcoauth.v1.OauthService/GetToken"
 	OauthService_GetAccessTokenInfo_FullMethodName   = "/grpcoauth.v1.OauthService/GetAccessTokenInfo"
 	OauthService_GetAuthorizeUrl_FullMethodName      = "/grpcoauth.v1.OauthService/GetAuthorizeUrl"
-	OauthService_KakaoCallback_FullMethodName        = "/grpcoauth.v1.OauthService/KakaoCallback"
 )
 
 // OauthServiceClient is the client API for OauthService service.
@@ -45,7 +44,6 @@ type OauthServiceClient interface {
 	GetToken(ctx context.Context, in *GetTokenRequest, opts ...grpc.CallOption) (*GetTokenResponse, error)
 	GetAccessTokenInfo(ctx context.Context, in *GetAccessTokenInfoRequest, opts ...grpc.CallOption) (*GetAccessTokenInfoResponse, error)
 	GetAuthorizeUrl(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAuthorizeUrlResponse, error)
-	KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error)
 }
 
 type oauthServiceClient struct {
@@ -146,16 +144,6 @@ func (c *oauthServiceClient) GetAuthorizeUrl(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
-func (c *oauthServiceClient) KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(KakaoCallbackResponse)
-	err := c.cc.Invoke(ctx, OauthService_KakaoCallback_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // OauthServiceServer is the server API for OauthService service.
 // All implementations must embed UnimplementedOauthServiceServer
 // for forward compatibility.
@@ -169,7 +157,6 @@ type OauthServiceServer interface {
 	GetToken(context.Context, *GetTokenRequest) (*GetTokenResponse, error)
 	GetAccessTokenInfo(context.Context, *GetAccessTokenInfoRequest) (*GetAccessTokenInfoResponse, error)
 	GetAuthorizeUrl(context.Context, *emptypb.Empty) (*GetAuthorizeUrlResponse, error)
-	KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error)
 	mustEmbedUnimplementedOauthServiceServer()
 }
 
@@ -206,9 +193,6 @@ func (UnimplementedOauthServiceServer) GetAccessTokenInfo(context.Context, *GetA
 }
 func (UnimplementedOauthServiceServer) GetAuthorizeUrl(context.Context, *emptypb.Empty) (*GetAuthorizeUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeUrl not implemented")
-}
-func (UnimplementedOauthServiceServer) KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method KakaoCallback not implemented")
 }
 func (UnimplementedOauthServiceServer) mustEmbedUnimplementedOauthServiceServer() {}
 func (UnimplementedOauthServiceServer) testEmbeddedByValue()                      {}
@@ -393,24 +377,6 @@ func _OauthService_GetAuthorizeUrl_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OauthService_KakaoCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(KakaoCallbackRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OauthServiceServer).KakaoCallback(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OauthService_KakaoCallback_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthServiceServer).KakaoCallback(ctx, req.(*KakaoCallbackRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // OauthService_ServiceDesc is the grpc.ServiceDesc for OauthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -454,9 +420,183 @@ var OauthService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetAuthorizeUrl",
 			Handler:    _OauthService_GetAuthorizeUrl_Handler,
 		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "grpcoauth/v1/oauth.proto",
+}
+
+const (
+	OauthCallbackService_NativeCallback_FullMethodName = "/grpcoauth.v1.OauthCallbackService/NativeCallback"
+	OauthCallbackService_KakaoCallback_FullMethodName  = "/grpcoauth.v1.OauthCallbackService/KakaoCallback"
+	OauthCallbackService_NaverCallback_FullMethodName  = "/grpcoauth.v1.OauthCallbackService/NaverCallback"
+)
+
+// OauthCallbackServiceClient is the client API for OauthCallbackService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OauthCallbackServiceClient interface {
+	NativeCallback(ctx context.Context, in *NativeCallbackRequest, opts ...grpc.CallOption) (*NativeCallbackResponse, error)
+	KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error)
+	NaverCallback(ctx context.Context, in *NaverCallbackRequest, opts ...grpc.CallOption) (*NaverCallbackResponse, error)
+}
+
+type oauthCallbackServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOauthCallbackServiceClient(cc grpc.ClientConnInterface) OauthCallbackServiceClient {
+	return &oauthCallbackServiceClient{cc}
+}
+
+func (c *oauthCallbackServiceClient) NativeCallback(ctx context.Context, in *NativeCallbackRequest, opts ...grpc.CallOption) (*NativeCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NativeCallbackResponse)
+	err := c.cc.Invoke(ctx, OauthCallbackService_NativeCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oauthCallbackServiceClient) KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(KakaoCallbackResponse)
+	err := c.cc.Invoke(ctx, OauthCallbackService_KakaoCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oauthCallbackServiceClient) NaverCallback(ctx context.Context, in *NaverCallbackRequest, opts ...grpc.CallOption) (*NaverCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NaverCallbackResponse)
+	err := c.cc.Invoke(ctx, OauthCallbackService_NaverCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OauthCallbackServiceServer is the server API for OauthCallbackService service.
+// All implementations must embed UnimplementedOauthCallbackServiceServer
+// for forward compatibility.
+type OauthCallbackServiceServer interface {
+	NativeCallback(context.Context, *NativeCallbackRequest) (*NativeCallbackResponse, error)
+	KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error)
+	NaverCallback(context.Context, *NaverCallbackRequest) (*NaverCallbackResponse, error)
+	mustEmbedUnimplementedOauthCallbackServiceServer()
+}
+
+// UnimplementedOauthCallbackServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedOauthCallbackServiceServer struct{}
+
+func (UnimplementedOauthCallbackServiceServer) NativeCallback(context.Context, *NativeCallbackRequest) (*NativeCallbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NativeCallback not implemented")
+}
+func (UnimplementedOauthCallbackServiceServer) KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method KakaoCallback not implemented")
+}
+func (UnimplementedOauthCallbackServiceServer) NaverCallback(context.Context, *NaverCallbackRequest) (*NaverCallbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NaverCallback not implemented")
+}
+func (UnimplementedOauthCallbackServiceServer) mustEmbedUnimplementedOauthCallbackServiceServer() {}
+func (UnimplementedOauthCallbackServiceServer) testEmbeddedByValue()                              {}
+
+// UnsafeOauthCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OauthCallbackServiceServer will
+// result in compilation errors.
+type UnsafeOauthCallbackServiceServer interface {
+	mustEmbedUnimplementedOauthCallbackServiceServer()
+}
+
+func RegisterOauthCallbackServiceServer(s grpc.ServiceRegistrar, srv OauthCallbackServiceServer) {
+	// If the following call pancis, it indicates UnimplementedOauthCallbackServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&OauthCallbackService_ServiceDesc, srv)
+}
+
+func _OauthCallbackService_NativeCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NativeCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthCallbackServiceServer).NativeCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthCallbackService_NativeCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthCallbackServiceServer).NativeCallback(ctx, req.(*NativeCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OauthCallbackService_KakaoCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(KakaoCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthCallbackServiceServer).KakaoCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthCallbackService_KakaoCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthCallbackServiceServer).KakaoCallback(ctx, req.(*KakaoCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OauthCallbackService_NaverCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NaverCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthCallbackServiceServer).NaverCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthCallbackService_NaverCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthCallbackServiceServer).NaverCallback(ctx, req.(*NaverCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// OauthCallbackService_ServiceDesc is the grpc.ServiceDesc for OauthCallbackService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OauthCallbackService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "grpcoauth.v1.OauthCallbackService",
+	HandlerType: (*OauthCallbackServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "NativeCallback",
+			Handler:    _OauthCallbackService_NativeCallback_Handler,
+		},
 		{
 			MethodName: "KakaoCallback",
-			Handler:    _OauthService_KakaoCallback_Handler,
+			Handler:    _OauthCallbackService_KakaoCallback_Handler,
+		},
+		{
+			MethodName: "NaverCallback",
+			Handler:    _OauthCallbackService_NaverCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

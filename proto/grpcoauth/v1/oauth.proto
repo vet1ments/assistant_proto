@@ -104,14 +104,6 @@ message GetAuthorizeUrlResponse {
   repeated AuthorizeUrlInfo urls = 3;
 }
 
-message KakaoCallbackRequest {
-
-}
-
-message KakaoCallbackResponse {
-
-}
-
 service OauthService {
   rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
   rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
@@ -126,10 +118,39 @@ service OauthService {
 
   rpc GetAuthorizeUrl(google.protobuf.Empty) returns (GetAuthorizeUrlResponse);
 
+}
 
+
+message NativeCallbackRequest {
+}
+message NativeCallbackResponse {
+}
+
+message KakaoCallbackRequest {
+}
+message KakaoCallbackResponse {
+}
+
+message NaverCallbackRequest {
+}
+message NaverCallbackResponse {
+}
+
+
+service OauthCallbackService {
+  rpc NativeCallback(NativeCallbackRequest) returns (NativeCallbackResponse) {
+    option (google.api.http) = {
+      get: "/callback/native",
+    };
+  }
   rpc KakaoCallback(KakaoCallbackRequest) returns (KakaoCallbackResponse) {
     option (google.api.http) = {
       get: "/callback/kakao",
+    };
+  }
+  rpc NaverCallback(NaverCallbackRequest) returns (NaverCallbackResponse) {
+    option (google.api.http) = {
+      get: "/callback/naver",
     };
   }
 }

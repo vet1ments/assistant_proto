@@ -26,7 +26,7 @@ plugins:
     out: go
     opt:
       - paths=source_relative
-  - remote: buf.build/protocolbuffers/go
+  - remote: buf.build/protocolbuffers/go:v1.34.2
     out: go
     opt:
       - paths=source_relative

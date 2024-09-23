@@ -3,3 +3,4 @@
 *.un~
 *.swp
 buf.lock
+go.sum

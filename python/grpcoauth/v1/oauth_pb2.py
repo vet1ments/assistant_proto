@@ -23,9 +23,10 @@ _sym_db = _symbol_database.Default()
 
 
 from grpcoauth.v1 import enums_pb2 as grpcoauth_dot_v1_dot_enums__pb2
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18grpcoauth/v1/oauth.proto\x12\x0cgrpcoauth.v1\x1a\x18grpcoauth/v1/enums.proto\"}\n\x08OauthApp\x12*\n\x04role\x18\x01 \x01(\x0e\x32\x16.grpcoauth.v1.RoleTypeR\x04role\x12\x0e\n\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n\x04name\x18\x03 \x01(\tR\x04name\x12!\n\x0credirect_uri\x18\x04 \x01(\tR\x0bredirectUri\"\x1e\n\x0cOauthAppUser\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\"3\n\x1bGetOauthAppTokenInfoRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"H\n\x1cGetOauthAppTokenInfoResponse\x12(\n\x03\x61pp\x18\x01 \x01(\x0b\x32\x16.grpcoauth.v1.OauthAppR\x03\x61pp\".\n\x16GetOauthAppUserRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"E\n\x17GetOauthAppUserResponse\x12*\n\x04user\x18\x01 \x01(\x0b\x32\x16.grpcoauth.v1.OauthAppR\x04user\"2\n\x1aGetOauthAppUserListRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"K\n\x1bGetOauthAppUserListResponse\x12,\n\x05users\x18\x01 \x03(\x0b\x32\x16.grpcoauth.v1.OauthAppR\x05users\"S\n\x1a\x43reateOauthAdminAppRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12!\n\x0credirect_uri\x18\x02 \x01(\tR\x0bredirectUri\"w\n\x1b\x43reateOauthAdminAppResponse\x12\x36\n\x08response\x18\x01 \x01(\x0e\x32\x1a.grpcoauth.v1.ResponseTypeR\x08response\x12 \n\x0b\x64\x65scription\x18\x02 \x01(\tR\x0b\x64\x65scription\"R\n\x19\x43reateOauthUserAppRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12!\n\x0credirect_uri\x18\x02 \x01(\tR\x0bredirectUri\"v\n\x1a\x43reateOauthUserAppResponse\x12\x36\n\x08response\x18\x01 \x01(\x0e\x32\x1a.grpcoauth.v1.ResponseTypeR\x08response\x12 \n\x0b\x64\x65scription\x18\x02 \x01(\tR\x0b\x64\x65scription\"\xfa\x01\n\x17GetAuthorizeCodeRequest\x12\x36\n\nlogin_type\x18\x01 \x01(\x0e\x32\x17.grpcoauth.v1.LoginTypeR\tloginType\x12K\n\tuser_info\x18\x04 \x01(\x0b\x32..grpcoauth.v1.GetAuthorizeCodeRequest.UserInfoR\x08userInfo\x12\x12\n\x04\x63ode\x18\x05 \x01(\tR\x04\x63ode\x12\x14\n\x05state\x18\x06 \x01(\tR\x05state\x1a\x30\n\x08UserInfo\x12\x14\n\x05\x65mail\x18\x02 \x01(\tR\x05\x65mail\x12\x0e\n\x02pw\x18\x03 \x01(\tR\x02pw\"D\n\x18GetAuthorizeCodeResponse\x12\x12\n\x04\x63ode\x18\x01 \x01(\tR\x04\x63ode\x12\x14\n\x05state\x18\x02 \x01(\tR\x05state\"\xe7\x01\n\x0fGetTokenRequest\x12\x36\n\ngrant_type\x18\x01 \x01(\x0e\x32\x17.grpcoauth.v1.GrantTypeR\tgrantType\x12\x1b\n\tclient_id\x18\x02 \x01(\tR\x08\x63lientId\x12!\n\x0credirect_uri\x18\x03 \x01(\tR\x0bredirectUri\x12\x12\n\x04\x63ode\x18\x04 \x01(\tR\x04\x63ode\x12#\n\rclient_secret\x18\x05 \x01(\tR\x0c\x63lientSecret\x12#\n\rrefresh_token\x18\x06 \x01(\tR\x0crefreshToken\"\x80\x02\n\x10GetTokenResponse\x12\x36\n\ntoken_type\x18\x01 \x01(\x0e\x32\x17.grpcoauth.v1.TokenTypeR\ttokenType\x12!\n\x0c\x61\x63\x63\x65ss_token\x18\x02 \x01(\tR\x0b\x61\x63\x63\x65ssToken\x12\x1d\n\nexpires_id\x18\x03 \x01(\x03R\texpiresId\x12#\n\rrefresh_token\x18\x04 \x01(\tR\x0crefreshToken\x12\x37\n\x18refresh_token_expires_in\x18\x05 \x01(\x03R\x15refreshTokenExpiresIn\x12\x14\n\x05scope\x18\x06 \x03(\tR\x05scope2\xcc\x05\n\x0cOauthService\x12m\n\x14GetOauthAppTokenInfo\x12).grpcoauth.v1.GetOauthAppTokenInfoRequest\x1a*.grpcoauth.v1.GetOauthAppTokenInfoResponse\x12^\n\x0fGetOauthAppUser\x12$.grpcoauth.v1.GetOauthAppUserRequest\x1a%.grpcoauth.v1.GetOauthAppUserResponse\x12j\n\x13GetOauthAppUserList\x12(.grpcoauth.v1.GetOauthAppUserListRequest\x1a).grpcoauth.v1.GetOauthAppUserListResponse\x12j\n\x13\x43reateOauthAdminApp\x12(.grpcoauth.v1.CreateOauthAdminAppRequest\x1a).grpcoauth.v1.CreateOauthAdminAppResponse\x12g\n\x12\x43reateOauthUserApp\x12\'.grpcoauth.v1.CreateOauthUserAppRequest\x1a(.grpcoauth.v1.CreateOauthUserAppResponse\x12\x61\n\x10GetAuthorizeCode\x12%.grpcoauth.v1.GetAuthorizeCodeRequest\x1a&.grpcoauth.v1.GetAuthorizeCodeResponse\x12I\n\x08GetToken\x12\x1d.grpcoauth.v1.GetTokenRequest\x1a\x1e.grpcoauth.v1.GetTokenResponseB\xab\x01\n\x10\x63om.grpcoauth.v1B\nOauthProtoP\x01Z:github.com/vet1ments/grpcoauth/go/grpcoauth/v1;grpcoauthv1\xa2\x02\x03GXX\xaa\x02\x0cGrpcoauth.V1\xca\x02\x0cGrpcoauth\\V1\xe2\x02\x18Grpcoauth\\V1\\GPBMetadata\xea\x02\rGrpcoauth::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18grpcoauth/v1/oauth.proto\x12\x0cgrpcoauth.v1\x1a\x18grpcoauth/v1/enums.proto\x1a\x1bgoogle/protobuf/empty.proto\"}\n\x08OauthApp\x12*\n\x04role\x18\x01 \x01(\x0e\x32\x16.grpcoauth.v1.RoleTypeR\x04role\x12\x0e\n\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n\x04name\x18\x03 \x01(\tR\x04name\x12!\n\x0credirect_uri\x18\x04 \x01(\tR\x0bredirectUri\"\x1e\n\x0cOauthAppUser\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\"3\n\x1bGetOauthAppTokenInfoRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"H\n\x1cGetOauthAppTokenInfoResponse\x12(\n\x03\x61pp\x18\x01 \x01(\x0b\x32\x16.grpcoauth.v1.OauthAppR\x03\x61pp\".\n\x16GetOauthAppUserRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"E\n\x17GetOauthAppUserResponse\x12*\n\x04user\x18\x01 \x01(\x0b\x32\x16.grpcoauth.v1.OauthAppR\x04user\"2\n\x1aGetOauthAppUserListRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"K\n\x1bGetOauthAppUserListResponse\x12,\n\x05users\x18\x01 \x03(\x0b\x32\x16.grpcoauth.v1.OauthAppR\x05users\"S\n\x1a\x43reateOauthAdminAppRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12!\n\x0credirect_uri\x18\x02 \x01(\tR\x0bredirectUri\"w\n\x1b\x43reateOauthAdminAppResponse\x12\x36\n\x08response\x18\x01 \x01(\x0e\x32\x1a.grpcoauth.v1.ResponseTypeR\x08response\x12 \n\x0b\x64\x65scription\x18\x02 \x01(\tR\x0b\x64\x65scription\"R\n\x19\x43reateOauthUserAppRequest\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12!\n\x0credirect_uri\x18\x02 \x01(\tR\x0bredirectUri\"v\n\x1a\x43reateOauthUserAppResponse\x12\x36\n\x08response\x18\x01 \x01(\x0e\x32\x1a.grpcoauth.v1.ResponseTypeR\x08response\x12 \n\x0b\x64\x65scription\x18\x02 \x01(\tR\x0b\x64\x65scription\"\xfa\x01\n\x17GetAuthorizeCodeRequest\x12\x36\n\nlogin_type\x18\x01 \x01(\x0e\x32\x17.grpcoauth.v1.LoginTypeR\tloginType\x12K\n\tuser_info\x18\x04 \x01(\x0b\x32..grpcoauth.v1.GetAuthorizeCodeRequest.UserInfoR\x08userInfo\x12\x12\n\x04\x63ode\x18\x05 \x01(\tR\x04\x63ode\x12\x14\n\x05state\x18\x06 \x01(\tR\x05state\x1a\x30\n\x08UserInfo\x12\x14\n\x05\x65mail\x18\x02 \x01(\tR\x05\x65mail\x12\x0e\n\x02pw\x18\x03 \x01(\tR\x02pw\"D\n\x18GetAuthorizeCodeResponse\x12\x12\n\x04\x63ode\x18\x01 \x01(\tR\x04\x63ode\x12\x14\n\x05state\x18\x02 \x01(\tR\x05state\"\xe7\x01\n\x0fGetTokenRequest\x12\x36\n\ngrant_type\x18\x01 \x01(\x0e\x32\x17.grpcoauth.v1.GrantTypeR\tgrantType\x12\x1b\n\tclient_id\x18\x02 \x01(\tR\x08\x63lientId\x12!\n\x0credirect_uri\x18\x03 \x01(\tR\x0bredirectUri\x12\x12\n\x04\x63ode\x18\x04 \x01(\tR\x04\x63ode\x12#\n\rclient_secret\x18\x05 \x01(\tR\x0c\x63lientSecret\x12#\n\rrefresh_token\x18\x06 \x01(\tR\x0crefreshToken\"\x80\x02\n\x10GetTokenResponse\x12\x36\n\ntoken_type\x18\x01 \x01(\x0e\x32\x17.grpcoauth.v1.TokenTypeR\ttokenType\x12!\n\x0c\x61\x63\x63\x65ss_token\x18\x02 \x01(\tR\x0b\x61\x63\x63\x65ssToken\x12\x1d\n\nexpires_id\x18\x03 \x01(\x03R\texpiresId\x12#\n\rrefresh_token\x18\x04 \x01(\tR\x0crefreshToken\x12\x37\n\x18refresh_token_expires_in\x18\x05 \x01(\x03R\x15refreshTokenExpiresIn\x12\x14\n\x05scope\x18\x06 \x03(\tR\x05scope\"1\n\x19GetAccessTokenInfoRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"b\n\x1aGetAccessTokenInfoResponse\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n\x06\x61pp_id\x18\x02 \x01(\tR\x05\x61ppId\x12\x1d\n\nexpires_id\x18\x03 \x01(\x03R\texpiresId\"\xb8\x01\n\x17GetAuthorizeUrlResponse\x12J\n\x04urls\x18\x03 \x03(\x0b\x32\x36.grpcoauth.v1.GetAuthorizeUrlResponse.AuthorizeUrlInfoR\x04urls\x1aQ\n\x10\x41uthorizeUrlInfo\x12+\n\x04type\x18\x01 \x01(\x0e\x32\x17.grpcoauth.v1.LoginTypeR\x04type\x12\x10\n\x03url\x18\x02 \x01(\tR\x03url2\x87\x07\n\x0cOauthService\x12m\n\x14GetOauthAppTokenInfo\x12).grpcoauth.v1.GetOauthAppTokenInfoRequest\x1a*.grpcoauth.v1.GetOauthAppTokenInfoResponse\x12^\n\x0fGetOauthAppUser\x12$.grpcoauth.v1.GetOauthAppUserRequest\x1a%.grpcoauth.v1.GetOauthAppUserResponse\x12j\n\x13GetOauthAppUserList\x12(.grpcoauth.v1.GetOauthAppUserListRequest\x1a).grpcoauth.v1.GetOauthAppUserListResponse\x12j\n\x13\x43reateOauthAdminApp\x12(.grpcoauth.v1.CreateOauthAdminAppRequest\x1a).grpcoauth.v1.CreateOauthAdminAppResponse\x12g\n\x12\x43reateOauthUserApp\x12\'.grpcoauth.v1.CreateOauthUserAppRequest\x1a(.grpcoauth.v1.CreateOauthUserAppResponse\x12\x61\n\x10GetAuthorizeCode\x12%.grpcoauth.v1.GetAuthorizeCodeRequest\x1a&.grpcoauth.v1.GetAuthorizeCodeResponse\x12I\n\x08GetToken\x12\x1d.grpcoauth.v1.GetTokenRequest\x1a\x1e.grpcoauth.v1.GetTokenResponse\x12g\n\x12GetAccessTokenInfo\x12\'.grpcoauth.v1.GetAccessTokenInfoRequest\x1a(.grpcoauth.v1.GetAccessTokenInfoResponse\x12P\n\x0fGetAuthorizeUrl\x12\x16.google.protobuf.Empty\x1a%.grpcoauth.v1.GetAuthorizeUrlResponseB\xab\x01\n\x10\x63om.grpcoauth.v1B\nOauthProtoP\x01Z:github.com/vet1ments/grpcoauth/go/grpcoauth/v1;grpcoauthv1\xa2\x02\x03GXX\xaa\x02\x0cGrpcoauth.V1\xca\x02\x0cGrpcoauth\\V1\xe2\x02\x18Grpcoauth\\V1\\GPBMetadata\xea\x02\rGrpcoauth::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,40 +34,48 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'grpcoauth.v1.oauth_pb2', _g
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\020com.grpcoauth.v1B\nOauthProtoP\001Z:github.com/vet1ments/grpcoauth/go/grpcoauth/v1;grpcoauthv1\242\002\003GXX\252\002\014Grpcoauth.V1\312\002\014Grpcoauth\\V1\342\002\030Grpcoauth\\V1\\GPBMetadata\352\002\rGrpcoauth::V1'
-  _globals['_OAUTHAPP']._serialized_start=68
-  _globals['_OAUTHAPP']._serialized_end=193
-  _globals['_OAUTHAPPUSER']._serialized_start=195
-  _globals['_OAUTHAPPUSER']._serialized_end=225
-  _globals['_GETOAUTHAPPTOKENINFOREQUEST']._serialized_start=227
-  _globals['_GETOAUTHAPPTOKENINFOREQUEST']._serialized_end=278
-  _globals['_GETOAUTHAPPTOKENINFORESPONSE']._serialized_start=280
-  _globals['_GETOAUTHAPPTOKENINFORESPONSE']._serialized_end=352
-  _globals['_GETOAUTHAPPUSERREQUEST']._serialized_start=354
-  _globals['_GETOAUTHAPPUSERREQUEST']._serialized_end=400
-  _globals['_GETOAUTHAPPUSERRESPONSE']._serialized_start=402
-  _globals['_GETOAUTHAPPUSERRESPONSE']._serialized_end=471
-  _globals['_GETOAUTHAPPUSERLISTREQUEST']._serialized_start=473
-  _globals['_GETOAUTHAPPUSERLISTREQUEST']._serialized_end=523
-  _globals['_GETOAUTHAPPUSERLISTRESPONSE']._serialized_start=525
-  _globals['_GETOAUTHAPPUSERLISTRESPONSE']._serialized_end=600
-  _globals['_CREATEOAUTHADMINAPPREQUEST']._serialized_start=602
-  _globals['_CREATEOAUTHADMINAPPREQUEST']._serialized_end=685
-  _globals['_CREATEOAUTHADMINAPPRESPONSE']._serialized_start=687
-  _globals['_CREATEOAUTHADMINAPPRESPONSE']._serialized_end=806
-  _globals['_CREATEOAUTHUSERAPPREQUEST']._serialized_start=808
-  _globals['_CREATEOAUTHUSERAPPREQUEST']._serialized_end=890
-  _globals['_CREATEOAUTHUSERAPPRESPONSE']._serialized_start=892
-  _globals['_CREATEOAUTHUSERAPPRESPONSE']._serialized_end=1010
-  _globals['_GETAUTHORIZECODEREQUEST']._serialized_start=1013
-  _globals['_GETAUTHORIZECODEREQUEST']._serialized_end=1263
-  _globals['_GETAUTHORIZECODEREQUEST_USERINFO']._serialized_start=1215
-  _globals['_GETAUTHORIZECODEREQUEST_USERINFO']._serialized_end=1263
-  _globals['_GETAUTHORIZECODERESPONSE']._serialized_start=1265
-  _globals['_GETAUTHORIZECODERESPONSE']._serialized_end=1333
-  _globals['_GETTOKENREQUEST']._serialized_start=1336
-  _globals['_GETTOKENREQUEST']._serialized_end=1567
-  _globals['_GETTOKENRESPONSE']._serialized_start=1570
-  _globals['_GETTOKENRESPONSE']._serialized_end=1826
-  _globals['_OAUTHSERVICE']._serialized_start=1829
-  _globals['_OAUTHSERVICE']._serialized_end=2545
+  _globals['_OAUTHAPP']._serialized_start=97
+  _globals['_OAUTHAPP']._serialized_end=222
+  _globals['_OAUTHAPPUSER']._serialized_start=224
+  _globals['_OAUTHAPPUSER']._serialized_end=254
+  _globals['_GETOAUTHAPPTOKENINFOREQUEST']._serialized_start=256
+  _globals['_GETOAUTHAPPTOKENINFOREQUEST']._serialized_end=307
+  _globals['_GETOAUTHAPPTOKENINFORESPONSE']._serialized_start=309
+  _globals['_GETOAUTHAPPTOKENINFORESPONSE']._serialized_end=381
+  _globals['_GETOAUTHAPPUSERREQUEST']._serialized_start=383
+  _globals['_GETOAUTHAPPUSERREQUEST']._serialized_end=429
+  _globals['_GETOAUTHAPPUSERRESPONSE']._serialized_start=431
+  _globals['_GETOAUTHAPPUSERRESPONSE']._serialized_end=500
+  _globals['_GETOAUTHAPPUSERLISTREQUEST']._serialized_start=502
+  _globals['_GETOAUTHAPPUSERLISTREQUEST']._serialized_end=552
+  _globals['_GETOAUTHAPPUSERLISTRESPONSE']._serialized_start=554
+  _globals['_GETOAUTHAPPUSERLISTRESPONSE']._serialized_end=629
+  _globals['_CREATEOAUTHADMINAPPREQUEST']._serialized_start=631
+  _globals['_CREATEOAUTHADMINAPPREQUEST']._serialized_end=714
+  _globals['_CREATEOAUTHADMINAPPRESPONSE']._serialized_start=716
+  _globals['_CREATEOAUTHADMINAPPRESPONSE']._serialized_end=835
+  _globals['_CREATEOAUTHUSERAPPREQUEST']._serialized_start=837
+  _globals['_CREATEOAUTHUSERAPPREQUEST']._serialized_end=919
+  _globals['_CREATEOAUTHUSERAPPRESPONSE']._serialized_start=921
+  _globals['_CREATEOAUTHUSERAPPRESPONSE']._serialized_end=1039
+  _globals['_GETAUTHORIZECODEREQUEST']._serialized_start=1042
+  _globals['_GETAUTHORIZECODEREQUEST']._serialized_end=1292
+  _globals['_GETAUTHORIZECODEREQUEST_USERINFO']._serialized_start=1244
+  _globals['_GETAUTHORIZECODEREQUEST_USERINFO']._serialized_end=1292
+  _globals['_GETAUTHORIZECODERESPONSE']._serialized_start=1294
+  _globals['_GETAUTHORIZECODERESPONSE']._serialized_end=1362
+  _globals['_GETTOKENREQUEST']._serialized_start=1365
+  _globals['_GETTOKENREQUEST']._serialized_end=1596
+  _globals['_GETTOKENRESPONSE']._serialized_start=1599
+  _globals['_GETTOKENRESPONSE']._serialized_end=1855
+  _globals['_GETACCESSTOKENINFOREQUEST']._serialized_start=1857
+  _globals['_GETACCESSTOKENINFOREQUEST']._serialized_end=1906
+  _globals['_GETACCESSTOKENINFORESPONSE']._serialized_start=1908
+  _globals['_GETACCESSTOKENINFORESPONSE']._serialized_end=2006
+  _globals['_GETAUTHORIZEURLRESPONSE']._serialized_start=2009
+  _globals['_GETAUTHORIZEURLRESPONSE']._serialized_end=2193
+  _globals['_GETAUTHORIZEURLRESPONSE_AUTHORIZEURLINFO']._serialized_start=2112
+  _globals['_GETAUTHORIZEURLRESPONSE_AUTHORIZEURLINFO']._serialized_end=2193
+  _globals['_OAUTHSERVICE']._serialized_start=2196
+  _globals['_OAUTHSERVICE']._serialized_end=3099
 # @@protoc_insertion_point(module_scope)

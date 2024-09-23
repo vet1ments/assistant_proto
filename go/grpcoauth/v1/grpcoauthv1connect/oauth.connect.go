@@ -9,6 +9,7 @@ import (
 	context "context"
 	errors "errors"
 	v1 "github.com/vet1ments/grpcoauth/go/grpcoauth/v1"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	http "net/http"
 	strings "strings"
 )
@@ -53,6 +54,12 @@ const (
 	OauthServiceGetAuthorizeCodeProcedure = "/grpcoauth.v1.OauthService/GetAuthorizeCode"
 	// OauthServiceGetTokenProcedure is the fully-qualified name of the OauthService's GetToken RPC.
 	OauthServiceGetTokenProcedure = "/grpcoauth.v1.OauthService/GetToken"
+	// OauthServiceGetAccessTokenInfoProcedure is the fully-qualified name of the OauthService's
+	// GetAccessTokenInfo RPC.
+	OauthServiceGetAccessTokenInfoProcedure = "/grpcoauth.v1.OauthService/GetAccessTokenInfo"
+	// OauthServiceGetAuthorizeUrlProcedure is the fully-qualified name of the OauthService's
+	// GetAuthorizeUrl RPC.
+	OauthServiceGetAuthorizeUrlProcedure = "/grpcoauth.v1.OauthService/GetAuthorizeUrl"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -65,6 +72,8 @@ var (
 	oauthServiceCreateOauthUserAppMethodDescriptor   = oauthServiceServiceDescriptor.Methods().ByName("CreateOauthUserApp")
 	oauthServiceGetAuthorizeCodeMethodDescriptor     = oauthServiceServiceDescriptor.Methods().ByName("GetAuthorizeCode")
 	oauthServiceGetTokenMethodDescriptor             = oauthServiceServiceDescriptor.Methods().ByName("GetToken")
+	oauthServiceGetAccessTokenInfoMethodDescriptor   = oauthServiceServiceDescriptor.Methods().ByName("GetAccessTokenInfo")
+	oauthServiceGetAuthorizeUrlMethodDescriptor      = oauthServiceServiceDescriptor.Methods().ByName("GetAuthorizeUrl")
 )
 
 // OauthServiceClient is a client for the grpcoauth.v1.OauthService service.
@@ -76,6 +85,8 @@ type OauthServiceClient interface {
 	CreateOauthUserApp(context.Context, *connect.Request[v1.CreateOauthUserAppRequest]) (*connect.Response[v1.CreateOauthUserAppResponse], error)
 	GetAuthorizeCode(context.Context, *connect.Request[v1.GetAuthorizeCodeRequest]) (*connect.Response[v1.GetAuthorizeCodeResponse], error)
 	GetToken(context.Context, *connect.Request[v1.GetTokenRequest]) (*connect.Response[v1.GetTokenResponse], error)
+	GetAccessTokenInfo(context.Context, *connect.Request[v1.GetAccessTokenInfoRequest]) (*connect.Response[v1.GetAccessTokenInfoResponse], error)
+	GetAuthorizeUrl(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.GetAuthorizeUrlResponse], error)
 }
 
 // NewOauthServiceClient constructs a client for the grpcoauth.v1.OauthService service. By default,
@@ -130,6 +141,18 @@ func NewOauthServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(oauthServiceGetTokenMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		getAccessTokenInfo: connect.NewClient[v1.GetAccessTokenInfoRequest, v1.GetAccessTokenInfoResponse](
+			httpClient,
+			baseURL+OauthServiceGetAccessTokenInfoProcedure,
+			connect.WithSchema(oauthServiceGetAccessTokenInfoMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		getAuthorizeUrl: connect.NewClient[emptypb.Empty, v1.GetAuthorizeUrlResponse](
+			httpClient,
+			baseURL+OauthServiceGetAuthorizeUrlProcedure,
+			connect.WithSchema(oauthServiceGetAuthorizeUrlMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -142,6 +165,8 @@ type oauthServiceClient struct {
 	createOauthUserApp   *connect.Client[v1.CreateOauthUserAppRequest, v1.CreateOauthUserAppResponse]
 	getAuthorizeCode     *connect.Client[v1.GetAuthorizeCodeRequest, v1.GetAuthorizeCodeResponse]
 	getToken             *connect.Client[v1.GetTokenRequest, v1.GetTokenResponse]
+	getAccessTokenInfo   *connect.Client[v1.GetAccessTokenInfoRequest, v1.GetAccessTokenInfoResponse]
+	getAuthorizeUrl      *connect.Client[emptypb.Empty, v1.GetAuthorizeUrlResponse]
 }
 
 // GetOauthAppTokenInfo calls grpcoauth.v1.OauthService.GetOauthAppTokenInfo.
@@ -179,6 +204,16 @@ func (c *oauthServiceClient) GetToken(ctx context.Context, req *connect.Request[
 	return c.getToken.CallUnary(ctx, req)
 }
 
+// GetAccessTokenInfo calls grpcoauth.v1.OauthService.GetAccessTokenInfo.
+func (c *oauthServiceClient) GetAccessTokenInfo(ctx context.Context, req *connect.Request[v1.GetAccessTokenInfoRequest]) (*connect.Response[v1.GetAccessTokenInfoResponse], error) {
+	return c.getAccessTokenInfo.CallUnary(ctx, req)
+}
+
+// GetAuthorizeUrl calls grpcoauth.v1.OauthService.GetAuthorizeUrl.
+func (c *oauthServiceClient) GetAuthorizeUrl(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.GetAuthorizeUrlResponse], error) {
+	return c.getAuthorizeUrl.CallUnary(ctx, req)
+}
+
 // OauthServiceHandler is an implementation of the grpcoauth.v1.OauthService service.
 type OauthServiceHandler interface {
 	GetOauthAppTokenInfo(context.Context, *connect.Request[v1.GetOauthAppTokenInfoRequest]) (*connect.Response[v1.GetOauthAppTokenInfoResponse], error)
@@ -188,6 +223,8 @@ type OauthServiceHandler interface {
 	CreateOauthUserApp(context.Context, *connect.Request[v1.CreateOauthUserAppRequest]) (*connect.Response[v1.CreateOauthUserAppResponse], error)
 	GetAuthorizeCode(context.Context, *connect.Request[v1.GetAuthorizeCodeRequest]) (*connect.Response[v1.GetAuthorizeCodeResponse], error)
 	GetToken(context.Context, *connect.Request[v1.GetTokenRequest]) (*connect.Response[v1.GetTokenResponse], error)
+	GetAccessTokenInfo(context.Context, *connect.Request[v1.GetAccessTokenInfoRequest]) (*connect.Response[v1.GetAccessTokenInfoResponse], error)
+	GetAuthorizeUrl(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.GetAuthorizeUrlResponse], error)
 }
 
 // NewOauthServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -238,6 +275,18 @@ func NewOauthServiceHandler(svc OauthServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(oauthServiceGetTokenMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	oauthServiceGetAccessTokenInfoHandler := connect.NewUnaryHandler(
+		OauthServiceGetAccessTokenInfoProcedure,
+		svc.GetAccessTokenInfo,
+		connect.WithSchema(oauthServiceGetAccessTokenInfoMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	oauthServiceGetAuthorizeUrlHandler := connect.NewUnaryHandler(
+		OauthServiceGetAuthorizeUrlProcedure,
+		svc.GetAuthorizeUrl,
+		connect.WithSchema(oauthServiceGetAuthorizeUrlMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/grpcoauth.v1.OauthService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case OauthServiceGetOauthAppTokenInfoProcedure:
@@ -254,6 +303,10 @@ func NewOauthServiceHandler(svc OauthServiceHandler, opts ...connect.HandlerOpti
 			oauthServiceGetAuthorizeCodeHandler.ServeHTTP(w, r)
 		case OauthServiceGetTokenProcedure:
 			oauthServiceGetTokenHandler.ServeHTTP(w, r)
+		case OauthServiceGetAccessTokenInfoProcedure:
+			oauthServiceGetAccessTokenInfoHandler.ServeHTTP(w, r)
+		case OauthServiceGetAuthorizeUrlProcedure:
+			oauthServiceGetAuthorizeUrlHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -289,4 +342,12 @@ func (UnimplementedOauthServiceHandler) GetAuthorizeCode(context.Context, *conne
 
 func (UnimplementedOauthServiceHandler) GetToken(context.Context, *connect.Request[v1.GetTokenRequest]) (*connect.Response[v1.GetTokenResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("grpcoauth.v1.OauthService.GetToken is not implemented"))
+}
+
+func (UnimplementedOauthServiceHandler) GetAccessTokenInfo(context.Context, *connect.Request[v1.GetAccessTokenInfoRequest]) (*connect.Response[v1.GetAccessTokenInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("grpcoauth.v1.OauthService.GetAccessTokenInfo is not implemented"))
+}
+
+func (UnimplementedOauthServiceHandler) GetAuthorizeUrl(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.GetAuthorizeUrlResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("grpcoauth.v1.OauthService.GetAuthorizeUrl is not implemented"))
 }

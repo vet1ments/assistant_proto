@@ -2,6 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from grpcoauth.v1 import oauth_pb2 as grpcoauth_dot_v1_dot_oauth__pb2
 
 
@@ -48,6 +49,16 @@ class OauthServiceStub(object):
                 '/grpcoauth.v1.OauthService/GetToken',
                 request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetTokenRequest.SerializeToString,
                 response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetTokenResponse.FromString,
+                _registered_method=True)
+        self.GetAccessTokenInfo = channel.unary_unary(
+                '/grpcoauth.v1.OauthService/GetAccessTokenInfo',
+                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoRequest.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoResponse.FromString,
+                _registered_method=True)
+        self.GetAuthorizeUrl = channel.unary_unary(
+                '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.FromString,
                 _registered_method=True)
 
 
@@ -96,6 +107,18 @@ class OauthServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAccessTokenInfo(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAuthorizeUrl(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OauthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -133,6 +156,16 @@ def add_OauthServiceServicer_to_server(servicer, server):
                     servicer.GetToken,
                     request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetTokenRequest.FromString,
                     response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetTokenResponse.SerializeToString,
+            ),
+            'GetAccessTokenInfo': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAccessTokenInfo,
+                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoRequest.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoResponse.SerializeToString,
+            ),
+            'GetAuthorizeUrl': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAuthorizeUrl,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -324,6 +357,60 @@ class OauthService(object):
             '/grpcoauth.v1.OauthService/GetToken',
             grpcoauth_dot_v1_dot_oauth__pb2.GetTokenRequest.SerializeToString,
             grpcoauth_dot_v1_dot_oauth__pb2.GetTokenResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetAccessTokenInfo(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/grpcoauth.v1.OauthService/GetAccessTokenInfo',
+            grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoRequest.SerializeToString,
+            grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetAuthorizeUrl(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.FromString,
             options,
             channel_credentials,
             insecure,

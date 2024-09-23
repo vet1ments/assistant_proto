@@ -3,6 +3,7 @@ syntax = "proto3";
 package grpcoauth.v1;
 
 import "grpcoauth/v1/enums.proto";
+import "google/protobuf/empty.proto";
 
 message OauthApp {
   grpcoauth.v1.RoleType role = 1;
@@ -35,6 +36,7 @@ message GetOauthAppUserListRequest {
 message GetOauthAppUserListResponse {
   repeated OauthApp users = 1;
 }
+
 message CreateOauthAdminAppRequest {
   string name = 1;
   string redirect_uri = 2;
@@ -93,6 +95,14 @@ message GetAccessTokenInfoResponse {
   int64 expires_id = 3;
 }
 
+message GetAuthorizeUrlResponse {
+  message AuthorizeUrlInfo {
+    LoginType type = 1;
+    string url = 2;
+  }
+  repeated AuthorizeUrlInfo urls = 3;
+}
+
 service OauthService {
   rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
   rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
@@ -104,4 +114,6 @@ service OauthService {
   rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse);
   rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
   rpc GetAccessTokenInfo(GetAccessTokenInfoRequest) returns (GetAccessTokenInfoResponse);
+
+  rpc GetAuthorizeUrl(google.protobuf.Empty) returns (GetAuthorizeUrlResponse);
 }

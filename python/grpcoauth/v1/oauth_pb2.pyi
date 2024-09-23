@@ -1,4 +1,5 @@
 from grpcoauth.v1 import enums_pb2 as _enums_pb2
+from google.protobuf import empty_pb2 as _empty_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -150,3 +151,32 @@ class GetTokenResponse(_message.Message):
     refresh_token_expires_in: int
     scope: _containers.RepeatedScalarFieldContainer[str]
     def __init__(self, token_type: _Optional[_Union[_enums_pb2.TokenType, str]] = ..., access_token: _Optional[str] = ..., expires_id: _Optional[int] = ..., refresh_token: _Optional[str] = ..., refresh_token_expires_in: _Optional[int] = ..., scope: _Optional[_Iterable[str]] = ...) -> None: ...
+
+class GetAccessTokenInfoRequest(_message.Message):
+    __slots__ = ("token",)
+    TOKEN_FIELD_NUMBER: _ClassVar[int]
+    token: str
+    def __init__(self, token: _Optional[str] = ...) -> None: ...
+
+class GetAccessTokenInfoResponse(_message.Message):
+    __slots__ = ("id", "app_id", "expires_id")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    APP_ID_FIELD_NUMBER: _ClassVar[int]
+    EXPIRES_ID_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    app_id: str
+    expires_id: int
+    def __init__(self, id: _Optional[str] = ..., app_id: _Optional[str] = ..., expires_id: _Optional[int] = ...) -> None: ...
+
+class GetAuthorizeUrlResponse(_message.Message):
+    __slots__ = ("urls",)
+    class AuthorizeUrlInfo(_message.Message):
+        __slots__ = ("type", "url")
+        TYPE_FIELD_NUMBER: _ClassVar[int]
+        URL_FIELD_NUMBER: _ClassVar[int]
+        type: _enums_pb2.LoginType
+        url: str
+        def __init__(self, type: _Optional[_Union[_enums_pb2.LoginType, str]] = ..., url: _Optional[str] = ...) -> None: ...
+    URLS_FIELD_NUMBER: _ClassVar[int]
+    urls: _containers.RepeatedCompositeFieldContainer[GetAuthorizeUrlResponse.AuthorizeUrlInfo]
+    def __init__(self, urls: _Optional[_Iterable[_Union[GetAuthorizeUrlResponse.AuthorizeUrlInfo, _Mapping]]] = ...) -> None: ...

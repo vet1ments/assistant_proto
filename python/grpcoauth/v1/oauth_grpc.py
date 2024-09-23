@@ -10,6 +10,7 @@ if typing.TYPE_CHECKING:
     import grpclib.server
 
 import grpcoauth.v1.enums_pb2
+import google.protobuf.empty_pb2
 import grpcoauth.v1.oauth_pb2
 
 
@@ -41,6 +42,14 @@ class OauthServiceBase(abc.ABC):
 
     @abc.abstractmethod
     async def GetToken(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.GetTokenRequest, grpcoauth.v1.oauth_pb2.GetTokenResponse]') -> None:
+        pass
+
+    @abc.abstractmethod
+    async def GetAccessTokenInfo(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.GetAccessTokenInfoRequest, grpcoauth.v1.oauth_pb2.GetAccessTokenInfoResponse]') -> None:
+        pass
+
+    @abc.abstractmethod
+    async def GetAuthorizeUrl(self, stream: 'grpclib.server.Stream[google.protobuf.empty_pb2.Empty, grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse]') -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
@@ -86,6 +95,18 @@ class OauthServiceBase(abc.ABC):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 grpcoauth.v1.oauth_pb2.GetTokenRequest,
                 grpcoauth.v1.oauth_pb2.GetTokenResponse,
+            ),
+            '/grpcoauth.v1.OauthService/GetAccessTokenInfo': grpclib.const.Handler(
+                self.GetAccessTokenInfo,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                grpcoauth.v1.oauth_pb2.GetAccessTokenInfoRequest,
+                grpcoauth.v1.oauth_pb2.GetAccessTokenInfoResponse,
+            ),
+            '/grpcoauth.v1.OauthService/GetAuthorizeUrl': grpclib.const.Handler(
+                self.GetAuthorizeUrl,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                google.protobuf.empty_pb2.Empty,
+                grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse,
             ),
         }
 
@@ -134,4 +155,16 @@ class OauthServiceStub:
             '/grpcoauth.v1.OauthService/GetToken',
             grpcoauth.v1.oauth_pb2.GetTokenRequest,
             grpcoauth.v1.oauth_pb2.GetTokenResponse,
+        )
+        self.GetAccessTokenInfo = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/grpcoauth.v1.OauthService/GetAccessTokenInfo',
+            grpcoauth.v1.oauth_pb2.GetAccessTokenInfoRequest,
+            grpcoauth.v1.oauth_pb2.GetAccessTokenInfoResponse,
+        )
+        self.GetAuthorizeUrl = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
+            google.protobuf.empty_pb2.Empty,
+            grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse,
         )

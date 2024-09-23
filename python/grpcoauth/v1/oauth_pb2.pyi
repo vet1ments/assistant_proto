@@ -1,5 +1,6 @@
 from grpcoauth.v1 import enums_pb2 as _enums_pb2
 from google.protobuf import empty_pb2 as _empty_pb2
+from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -180,3 +181,11 @@ class GetAuthorizeUrlResponse(_message.Message):
     URLS_FIELD_NUMBER: _ClassVar[int]
     urls: _containers.RepeatedCompositeFieldContainer[GetAuthorizeUrlResponse.AuthorizeUrlInfo]
     def __init__(self, urls: _Optional[_Iterable[_Union[GetAuthorizeUrlResponse.AuthorizeUrlInfo, _Mapping]]] = ...) -> None: ...
+
+class KakaoCallbackRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class KakaoCallbackResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...

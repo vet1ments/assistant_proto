@@ -11,6 +11,7 @@ if typing.TYPE_CHECKING:
 
 import grpcoauth.v1.enums_pb2
 import google.protobuf.empty_pb2
+import google.api.annotations_pb2
 import grpcoauth.v1.oauth_pb2
 
 
@@ -50,6 +51,10 @@ class OauthServiceBase(abc.ABC):
 
     @abc.abstractmethod
     async def GetAuthorizeUrl(self, stream: 'grpclib.server.Stream[google.protobuf.empty_pb2.Empty, grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse]') -> None:
+        pass
+
+    @abc.abstractmethod
+    async def KakaoCallback(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.KakaoCallbackRequest, grpcoauth.v1.oauth_pb2.KakaoCallbackResponse]') -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
@@ -107,6 +112,12 @@ class OauthServiceBase(abc.ABC):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.empty_pb2.Empty,
                 grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse,
+            ),
+            '/grpcoauth.v1.OauthService/KakaoCallback': grpclib.const.Handler(
+                self.KakaoCallback,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                grpcoauth.v1.oauth_pb2.KakaoCallbackRequest,
+                grpcoauth.v1.oauth_pb2.KakaoCallbackResponse,
             ),
         }
 
@@ -167,4 +178,10 @@ class OauthServiceStub:
             '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
             google.protobuf.empty_pb2.Empty,
             grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse,
+        )
+        self.KakaoCallback = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/grpcoauth.v1.OauthService/KakaoCallback',
+            grpcoauth.v1.oauth_pb2.KakaoCallbackRequest,
+            grpcoauth.v1.oauth_pb2.KakaoCallbackResponse,
         )

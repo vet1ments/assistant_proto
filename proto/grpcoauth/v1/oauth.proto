@@ -4,6 +4,7 @@ package grpcoauth.v1;
 
 import "grpcoauth/v1/enums.proto";
 import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 
 message OauthApp {
   grpcoauth.v1.RoleType role = 1;
@@ -103,6 +104,14 @@ message GetAuthorizeUrlResponse {
   repeated AuthorizeUrlInfo urls = 3;
 }
 
+message KakaoCallbackRequest {
+
+}
+
+message KakaoCallbackResponse {
+
+}
+
 service OauthService {
   rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
   rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
@@ -116,4 +125,11 @@ service OauthService {
   rpc GetAccessTokenInfo(GetAccessTokenInfoRequest) returns (GetAccessTokenInfoResponse);
 
   rpc GetAuthorizeUrl(google.protobuf.Empty) returns (GetAuthorizeUrlResponse);
+
+
+  rpc KakaoCallback(KakaoCallbackRequest) returns (KakaoCallbackResponse) {
+    option (google.api.http) = {
+      get: "/callback/kakao",
+    };
+  }
 }

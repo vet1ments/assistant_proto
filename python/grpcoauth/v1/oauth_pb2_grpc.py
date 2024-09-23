@@ -60,6 +60,11 @@ class OauthServiceStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.FromString,
                 _registered_method=True)
+        self.KakaoCallback = channel.unary_unary(
+                '/grpcoauth.v1.OauthService/KakaoCallback',
+                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackRequest.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackResponse.FromString,
+                _registered_method=True)
 
 
 class OauthServiceServicer(object):
@@ -119,6 +124,12 @@ class OauthServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def KakaoCallback(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OauthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -166,6 +177,11 @@ def add_OauthServiceServicer_to_server(servicer, server):
                     servicer.GetAuthorizeUrl,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.SerializeToString,
+            ),
+            'KakaoCallback': grpc.unary_unary_rpc_method_handler(
+                    servicer.KakaoCallback,
+                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackRequest.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -411,6 +427,33 @@ class OauthService(object):
             '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def KakaoCallback(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/grpcoauth.v1.OauthService/KakaoCallback',
+            grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackRequest.SerializeToString,
+            grpcoauth_dot_v1_dot_oauth__pb2.KakaoCallbackResponse.FromString,
             options,
             channel_credentials,
             insecure,

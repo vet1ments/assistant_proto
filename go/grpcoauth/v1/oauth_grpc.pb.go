@@ -29,6 +29,7 @@ const (
 	OauthService_GetToken_FullMethodName             = "/grpcoauth.v1.OauthService/GetToken"
 	OauthService_GetAccessTokenInfo_FullMethodName   = "/grpcoauth.v1.OauthService/GetAccessTokenInfo"
 	OauthService_GetAuthorizeUrl_FullMethodName      = "/grpcoauth.v1.OauthService/GetAuthorizeUrl"
+	OauthService_KakaoCallback_FullMethodName        = "/grpcoauth.v1.OauthService/KakaoCallback"
 )
 
 // OauthServiceClient is the client API for OauthService service.
@@ -44,6 +45,7 @@ type OauthServiceClient interface {
 	GetToken(ctx context.Context, in *GetTokenRequest, opts ...grpc.CallOption) (*GetTokenResponse, error)
 	GetAccessTokenInfo(ctx context.Context, in *GetAccessTokenInfoRequest, opts ...grpc.CallOption) (*GetAccessTokenInfoResponse, error)
 	GetAuthorizeUrl(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAuthorizeUrlResponse, error)
+	KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error)
 }
 
 type oauthServiceClient struct {
@@ -144,6 +146,16 @@ func (c *oauthServiceClient) GetAuthorizeUrl(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
+func (c *oauthServiceClient) KakaoCallback(ctx context.Context, in *KakaoCallbackRequest, opts ...grpc.CallOption) (*KakaoCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(KakaoCallbackResponse)
+	err := c.cc.Invoke(ctx, OauthService_KakaoCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OauthServiceServer is the server API for OauthService service.
 // All implementations must embed UnimplementedOauthServiceServer
 // for forward compatibility.
@@ -157,6 +169,7 @@ type OauthServiceServer interface {
 	GetToken(context.Context, *GetTokenRequest) (*GetTokenResponse, error)
 	GetAccessTokenInfo(context.Context, *GetAccessTokenInfoRequest) (*GetAccessTokenInfoResponse, error)
 	GetAuthorizeUrl(context.Context, *emptypb.Empty) (*GetAuthorizeUrlResponse, error)
+	KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error)
 	mustEmbedUnimplementedOauthServiceServer()
 }
 
@@ -193,6 +206,9 @@ func (UnimplementedOauthServiceServer) GetAccessTokenInfo(context.Context, *GetA
 }
 func (UnimplementedOauthServiceServer) GetAuthorizeUrl(context.Context, *emptypb.Empty) (*GetAuthorizeUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeUrl not implemented")
+}
+func (UnimplementedOauthServiceServer) KakaoCallback(context.Context, *KakaoCallbackRequest) (*KakaoCallbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method KakaoCallback not implemented")
 }
 func (UnimplementedOauthServiceServer) mustEmbedUnimplementedOauthServiceServer() {}
 func (UnimplementedOauthServiceServer) testEmbeddedByValue()                      {}
@@ -377,6 +393,24 @@ func _OauthService_GetAuthorizeUrl_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OauthService_KakaoCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(KakaoCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthServiceServer).KakaoCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthService_KakaoCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthServiceServer).KakaoCallback(ctx, req.(*KakaoCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OauthService_ServiceDesc is the grpc.ServiceDesc for OauthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -419,6 +453,10 @@ var OauthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAuthorizeUrl",
 			Handler:    _OauthService_GetAuthorizeUrl_Handler,
+		},
+		{
+			MethodName: "KakaoCallback",
+			Handler:    _OauthService_KakaoCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

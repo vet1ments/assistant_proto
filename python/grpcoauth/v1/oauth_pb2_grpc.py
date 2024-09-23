@@ -40,11 +40,6 @@ class OauthServiceStub(object):
                 request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.CreateOauthUserAppRequest.SerializeToString,
                 response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.CreateOauthUserAppResponse.FromString,
                 _registered_method=True)
-        self.GetAuthorizeCode = channel.unary_unary(
-                '/grpcoauth.v1.OauthService/GetAuthorizeCode',
-                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeResponse.FromString,
-                _registered_method=True)
         self.GetToken = channel.unary_unary(
                 '/grpcoauth.v1.OauthService/GetToken',
                 request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetTokenRequest.SerializeToString,
@@ -54,11 +49,6 @@ class OauthServiceStub(object):
                 '/grpcoauth.v1.OauthService/GetAccessTokenInfo',
                 request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoRequest.SerializeToString,
                 response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoResponse.FromString,
-                _registered_method=True)
-        self.GetAuthorizeUrl = channel.unary_unary(
-                '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.FromString,
                 _registered_method=True)
 
 
@@ -95,12 +85,6 @@ class OauthServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAuthorizeCode(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetToken(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -108,12 +92,6 @@ class OauthServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAccessTokenInfo(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAuthorizeUrl(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -147,11 +125,6 @@ def add_OauthServiceServicer_to_server(servicer, server):
                     request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.CreateOauthUserAppRequest.FromString,
                     response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.CreateOauthUserAppResponse.SerializeToString,
             ),
-            'GetAuthorizeCode': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAuthorizeCode,
-                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeResponse.SerializeToString,
-            ),
             'GetToken': grpc.unary_unary_rpc_method_handler(
                     servicer.GetToken,
                     request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetTokenRequest.FromString,
@@ -161,11 +134,6 @@ def add_OauthServiceServicer_to_server(servicer, server):
                     servicer.GetAccessTokenInfo,
                     request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoRequest.FromString,
                     response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAccessTokenInfoResponse.SerializeToString,
-            ),
-            'GetAuthorizeUrl': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAuthorizeUrl,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -314,33 +282,6 @@ class OauthService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetAuthorizeCode(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/grpcoauth.v1.OauthService/GetAuthorizeCode',
-            grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
     def GetToken(request,
             target,
             options=(),
@@ -394,8 +335,53 @@ class OauthService(object):
             metadata,
             _registered_method=True)
 
+
+class Oauth2ServiceStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.GetAuthorizeCode = channel.unary_unary(
+                '/grpcoauth.v1.Oauth2Service/GetAuthorizeCode',
+                request_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeRequest.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeResponse.FromString,
+                _registered_method=True)
+
+
+class Oauth2ServiceServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def GetAuthorizeCode(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_Oauth2ServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'GetAuthorizeCode': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAuthorizeCode,
+                    request_deserializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeRequest.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'grpcoauth.v1.Oauth2Service', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('grpcoauth.v1.Oauth2Service', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class Oauth2Service(object):
+    """Missing associated documentation comment in .proto file."""
+
     @staticmethod
-    def GetAuthorizeUrl(request,
+    def GetAuthorizeCode(request,
             target,
             options=(),
             channel_credentials=None,
@@ -408,9 +394,9 @@ class OauthService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeUrlResponse.FromString,
+            '/grpcoauth.v1.Oauth2Service/GetAuthorizeCode',
+            grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeRequest.SerializeToString,
+            grpcoauth_dot_v1_dot_oauth__pb2.GetAuthorizeCodeResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -38,19 +38,11 @@ class OauthServiceBase(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def GetAuthorizeCode(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.GetAuthorizeCodeRequest, grpcoauth.v1.oauth_pb2.GetAuthorizeCodeResponse]') -> None:
-        pass
-
-    @abc.abstractmethod
     async def GetToken(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.GetTokenRequest, grpcoauth.v1.oauth_pb2.GetTokenResponse]') -> None:
         pass
 
     @abc.abstractmethod
     async def GetAccessTokenInfo(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.GetAccessTokenInfoRequest, grpcoauth.v1.oauth_pb2.GetAccessTokenInfoResponse]') -> None:
-        pass
-
-    @abc.abstractmethod
-    async def GetAuthorizeUrl(self, stream: 'grpclib.server.Stream[google.protobuf.empty_pb2.Empty, grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse]') -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
@@ -85,12 +77,6 @@ class OauthServiceBase(abc.ABC):
                 grpcoauth.v1.oauth_pb2.CreateOauthUserAppRequest,
                 grpcoauth.v1.oauth_pb2.CreateOauthUserAppResponse,
             ),
-            '/grpcoauth.v1.OauthService/GetAuthorizeCode': grpclib.const.Handler(
-                self.GetAuthorizeCode,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.oauth_pb2.GetAuthorizeCodeRequest,
-                grpcoauth.v1.oauth_pb2.GetAuthorizeCodeResponse,
-            ),
             '/grpcoauth.v1.OauthService/GetToken': grpclib.const.Handler(
                 self.GetToken,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -102,12 +88,6 @@ class OauthServiceBase(abc.ABC):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 grpcoauth.v1.oauth_pb2.GetAccessTokenInfoRequest,
                 grpcoauth.v1.oauth_pb2.GetAccessTokenInfoResponse,
-            ),
-            '/grpcoauth.v1.OauthService/GetAuthorizeUrl': grpclib.const.Handler(
-                self.GetAuthorizeUrl,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                google.protobuf.empty_pb2.Empty,
-                grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse,
             ),
         }
 
@@ -145,12 +125,6 @@ class OauthServiceStub:
             grpcoauth.v1.oauth_pb2.CreateOauthUserAppRequest,
             grpcoauth.v1.oauth_pb2.CreateOauthUserAppResponse,
         )
-        self.GetAuthorizeCode = grpclib.client.UnaryUnaryMethod(
-            channel,
-            '/grpcoauth.v1.OauthService/GetAuthorizeCode',
-            grpcoauth.v1.oauth_pb2.GetAuthorizeCodeRequest,
-            grpcoauth.v1.oauth_pb2.GetAuthorizeCodeResponse,
-        )
         self.GetToken = grpclib.client.UnaryUnaryMethod(
             channel,
             '/grpcoauth.v1.OauthService/GetToken',
@@ -163,11 +137,33 @@ class OauthServiceStub:
             grpcoauth.v1.oauth_pb2.GetAccessTokenInfoRequest,
             grpcoauth.v1.oauth_pb2.GetAccessTokenInfoResponse,
         )
-        self.GetAuthorizeUrl = grpclib.client.UnaryUnaryMethod(
+
+
+class Oauth2ServiceBase(abc.ABC):
+
+    @abc.abstractmethod
+    async def GetAuthorizeCode(self, stream: 'grpclib.server.Stream[grpcoauth.v1.oauth_pb2.GetAuthorizeCodeRequest, grpcoauth.v1.oauth_pb2.GetAuthorizeCodeResponse]') -> None:
+        pass
+
+    def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
+        return {
+            '/grpcoauth.v1.Oauth2Service/GetAuthorizeCode': grpclib.const.Handler(
+                self.GetAuthorizeCode,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                grpcoauth.v1.oauth_pb2.GetAuthorizeCodeRequest,
+                grpcoauth.v1.oauth_pb2.GetAuthorizeCodeResponse,
+            ),
+        }
+
+
+class Oauth2ServiceStub:
+
+    def __init__(self, channel: grpclib.client.Channel) -> None:
+        self.GetAuthorizeCode = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/grpcoauth.v1.OauthService/GetAuthorizeUrl',
-            google.protobuf.empty_pb2.Empty,
-            grpcoauth.v1.oauth_pb2.GetAuthorizeUrlResponse,
+            '/grpcoauth.v1.Oauth2Service/GetAuthorizeCode',
+            grpcoauth.v1.oauth_pb2.GetAuthorizeCodeRequest,
+            grpcoauth.v1.oauth_pb2.GetAuthorizeCodeResponse,
         )
 
 

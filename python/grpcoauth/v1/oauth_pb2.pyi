@@ -94,33 +94,6 @@ class CreateOauthUserAppResponse(_message.Message):
     description: str
     def __init__(self, response: _Optional[_Union[_enums_pb2.ResponseType, str]] = ..., description: _Optional[str] = ...) -> None: ...
 
-class GetAuthorizeCodeRequest(_message.Message):
-    __slots__ = ("login_type", "user_info", "code", "state")
-    class UserInfo(_message.Message):
-        __slots__ = ("email", "pw")
-        EMAIL_FIELD_NUMBER: _ClassVar[int]
-        PW_FIELD_NUMBER: _ClassVar[int]
-        email: str
-        pw: str
-        def __init__(self, email: _Optional[str] = ..., pw: _Optional[str] = ...) -> None: ...
-    LOGIN_TYPE_FIELD_NUMBER: _ClassVar[int]
-    USER_INFO_FIELD_NUMBER: _ClassVar[int]
-    CODE_FIELD_NUMBER: _ClassVar[int]
-    STATE_FIELD_NUMBER: _ClassVar[int]
-    login_type: _enums_pb2.LoginType
-    user_info: GetAuthorizeCodeRequest.UserInfo
-    code: str
-    state: str
-    def __init__(self, login_type: _Optional[_Union[_enums_pb2.LoginType, str]] = ..., user_info: _Optional[_Union[GetAuthorizeCodeRequest.UserInfo, _Mapping]] = ..., code: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...
-
-class GetAuthorizeCodeResponse(_message.Message):
-    __slots__ = ("code", "state")
-    CODE_FIELD_NUMBER: _ClassVar[int]
-    STATE_FIELD_NUMBER: _ClassVar[int]
-    code: str
-    state: str
-    def __init__(self, code: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...
-
 class GetTokenRequest(_message.Message):
     __slots__ = ("grant_type", "client_id", "redirect_uri", "code", "client_secret", "refresh_token")
     GRANT_TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -169,18 +142,25 @@ class GetAccessTokenInfoResponse(_message.Message):
     expires_id: int
     def __init__(self, id: _Optional[str] = ..., app_id: _Optional[str] = ..., expires_id: _Optional[int] = ...) -> None: ...
 
-class GetAuthorizeUrlResponse(_message.Message):
-    __slots__ = ("urls",)
-    class AuthorizeUrlInfo(_message.Message):
-        __slots__ = ("type", "url")
-        TYPE_FIELD_NUMBER: _ClassVar[int]
-        URL_FIELD_NUMBER: _ClassVar[int]
-        type: _enums_pb2.LoginType
-        url: str
-        def __init__(self, type: _Optional[_Union[_enums_pb2.LoginType, str]] = ..., url: _Optional[str] = ...) -> None: ...
-    URLS_FIELD_NUMBER: _ClassVar[int]
-    urls: _containers.RepeatedCompositeFieldContainer[GetAuthorizeUrlResponse.AuthorizeUrlInfo]
-    def __init__(self, urls: _Optional[_Iterable[_Union[GetAuthorizeUrlResponse.AuthorizeUrlInfo, _Mapping]]] = ...) -> None: ...
+class GetAuthorizeCodeRequest(_message.Message):
+    __slots__ = ("client_id", "redirect_uri", "response_type", "state")
+    CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
+    REDIRECT_URI_FIELD_NUMBER: _ClassVar[int]
+    RESPONSE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    client_id: str
+    redirect_uri: str
+    response_type: str
+    state: str
+    def __init__(self, client_id: _Optional[str] = ..., redirect_uri: _Optional[str] = ..., response_type: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...
+
+class GetAuthorizeCodeResponse(_message.Message):
+    __slots__ = ("code", "state")
+    CODE_FIELD_NUMBER: _ClassVar[int]
+    STATE_FIELD_NUMBER: _ClassVar[int]
+    code: str
+    state: str
+    def __init__(self, code: _Optional[str] = ..., state: _Optional[str] = ...) -> None: ...
 
 class CallbackRequest(_message.Message):
     __slots__ = ("code", "state")

@@ -25,10 +25,8 @@ const (
 	OauthService_GetOauthAppUserList_FullMethodName  = "/grpcoauth.v1.OauthService/GetOauthAppUserList"
 	OauthService_CreateOauthAdminApp_FullMethodName  = "/grpcoauth.v1.OauthService/CreateOauthAdminApp"
 	OauthService_CreateOauthUserApp_FullMethodName   = "/grpcoauth.v1.OauthService/CreateOauthUserApp"
-	OauthService_GetAuthorizeCode_FullMethodName     = "/grpcoauth.v1.OauthService/GetAuthorizeCode"
 	OauthService_GetToken_FullMethodName             = "/grpcoauth.v1.OauthService/GetToken"
 	OauthService_GetAccessTokenInfo_FullMethodName   = "/grpcoauth.v1.OauthService/GetAccessTokenInfo"
-	OauthService_GetAuthorizeUrl_FullMethodName      = "/grpcoauth.v1.OauthService/GetAuthorizeUrl"
 )
 
 // OauthServiceClient is the client API for OauthService service.
@@ -40,10 +38,8 @@ type OauthServiceClient interface {
 	GetOauthAppUserList(ctx context.Context, in *GetOauthAppUserListRequest, opts ...grpc.CallOption) (*GetOauthAppUserListResponse, error)
 	CreateOauthAdminApp(ctx context.Context, in *CreateOauthAdminAppRequest, opts ...grpc.CallOption) (*CreateOauthAdminAppResponse, error)
 	CreateOauthUserApp(ctx context.Context, in *CreateOauthUserAppRequest, opts ...grpc.CallOption) (*CreateOauthUserAppResponse, error)
-	GetAuthorizeCode(ctx context.Context, in *GetAuthorizeCodeRequest, opts ...grpc.CallOption) (*GetAuthorizeCodeResponse, error)
 	GetToken(ctx context.Context, in *GetTokenRequest, opts ...grpc.CallOption) (*GetTokenResponse, error)
 	GetAccessTokenInfo(ctx context.Context, in *GetAccessTokenInfoRequest, opts ...grpc.CallOption) (*GetAccessTokenInfoResponse, error)
-	GetAuthorizeUrl(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAuthorizeUrlResponse, error)
 }
 
 type oauthServiceClient struct {
@@ -104,16 +100,6 @@ func (c *oauthServiceClient) CreateOauthUserApp(ctx context.Context, in *CreateO
 	return out, nil
 }
 
-func (c *oauthServiceClient) GetAuthorizeCode(ctx context.Context, in *GetAuthorizeCodeRequest, opts ...grpc.CallOption) (*GetAuthorizeCodeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAuthorizeCodeResponse)
-	err := c.cc.Invoke(ctx, OauthService_GetAuthorizeCode_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *oauthServiceClient) GetToken(ctx context.Context, in *GetTokenRequest, opts ...grpc.CallOption) (*GetTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTokenResponse)
@@ -134,16 +120,6 @@ func (c *oauthServiceClient) GetAccessTokenInfo(ctx context.Context, in *GetAcce
 	return out, nil
 }
 
-func (c *oauthServiceClient) GetAuthorizeUrl(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAuthorizeUrlResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAuthorizeUrlResponse)
-	err := c.cc.Invoke(ctx, OauthService_GetAuthorizeUrl_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // OauthServiceServer is the server API for OauthService service.
 // All implementations must embed UnimplementedOauthServiceServer
 // for forward compatibility.
@@ -153,10 +129,8 @@ type OauthServiceServer interface {
 	GetOauthAppUserList(context.Context, *GetOauthAppUserListRequest) (*GetOauthAppUserListResponse, error)
 	CreateOauthAdminApp(context.Context, *CreateOauthAdminAppRequest) (*CreateOauthAdminAppResponse, error)
 	CreateOauthUserApp(context.Context, *CreateOauthUserAppRequest) (*CreateOauthUserAppResponse, error)
-	GetAuthorizeCode(context.Context, *GetAuthorizeCodeRequest) (*GetAuthorizeCodeResponse, error)
 	GetToken(context.Context, *GetTokenRequest) (*GetTokenResponse, error)
 	GetAccessTokenInfo(context.Context, *GetAccessTokenInfoRequest) (*GetAccessTokenInfoResponse, error)
-	GetAuthorizeUrl(context.Context, *emptypb.Empty) (*GetAuthorizeUrlResponse, error)
 	mustEmbedUnimplementedOauthServiceServer()
 }
 
@@ -182,17 +156,11 @@ func (UnimplementedOauthServiceServer) CreateOauthAdminApp(context.Context, *Cre
 func (UnimplementedOauthServiceServer) CreateOauthUserApp(context.Context, *CreateOauthUserAppRequest) (*CreateOauthUserAppResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOauthUserApp not implemented")
 }
-func (UnimplementedOauthServiceServer) GetAuthorizeCode(context.Context, *GetAuthorizeCodeRequest) (*GetAuthorizeCodeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeCode not implemented")
-}
 func (UnimplementedOauthServiceServer) GetToken(context.Context, *GetTokenRequest) (*GetTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetToken not implemented")
 }
 func (UnimplementedOauthServiceServer) GetAccessTokenInfo(context.Context, *GetAccessTokenInfoRequest) (*GetAccessTokenInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessTokenInfo not implemented")
-}
-func (UnimplementedOauthServiceServer) GetAuthorizeUrl(context.Context, *emptypb.Empty) (*GetAuthorizeUrlResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeUrl not implemented")
 }
 func (UnimplementedOauthServiceServer) mustEmbedUnimplementedOauthServiceServer() {}
 func (UnimplementedOauthServiceServer) testEmbeddedByValue()                      {}
@@ -305,24 +273,6 @@ func _OauthService_CreateOauthUserApp_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OauthService_GetAuthorizeCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAuthorizeCodeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OauthServiceServer).GetAuthorizeCode(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OauthService_GetAuthorizeCode_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthServiceServer).GetAuthorizeCode(ctx, req.(*GetAuthorizeCodeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _OauthService_GetToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTokenRequest)
 	if err := dec(in); err != nil {
@@ -359,24 +309,6 @@ func _OauthService_GetAccessTokenInfo_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OauthService_GetAuthorizeUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OauthServiceServer).GetAuthorizeUrl(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OauthService_GetAuthorizeUrl_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthServiceServer).GetAuthorizeUrl(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // OauthService_ServiceDesc is the grpc.ServiceDesc for OauthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -405,10 +337,6 @@ var OauthService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _OauthService_CreateOauthUserApp_Handler,
 		},
 		{
-			MethodName: "GetAuthorizeCode",
-			Handler:    _OauthService_GetAuthorizeCode_Handler,
-		},
-		{
 			MethodName: "GetToken",
 			Handler:    _OauthService_GetToken_Handler,
 		},
@@ -416,9 +344,107 @@ var OauthService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetAccessTokenInfo",
 			Handler:    _OauthService_GetAccessTokenInfo_Handler,
 		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "grpcoauth/v1/oauth.proto",
+}
+
+const (
+	Oauth2Service_GetAuthorizeCode_FullMethodName = "/grpcoauth.v1.Oauth2Service/GetAuthorizeCode"
+)
+
+// Oauth2ServiceClient is the client API for Oauth2Service service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type Oauth2ServiceClient interface {
+	GetAuthorizeCode(ctx context.Context, in *GetAuthorizeCodeRequest, opts ...grpc.CallOption) (*GetAuthorizeCodeResponse, error)
+}
+
+type oauth2ServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOauth2ServiceClient(cc grpc.ClientConnInterface) Oauth2ServiceClient {
+	return &oauth2ServiceClient{cc}
+}
+
+func (c *oauth2ServiceClient) GetAuthorizeCode(ctx context.Context, in *GetAuthorizeCodeRequest, opts ...grpc.CallOption) (*GetAuthorizeCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAuthorizeCodeResponse)
+	err := c.cc.Invoke(ctx, Oauth2Service_GetAuthorizeCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Oauth2ServiceServer is the server API for Oauth2Service service.
+// All implementations must embed UnimplementedOauth2ServiceServer
+// for forward compatibility.
+type Oauth2ServiceServer interface {
+	GetAuthorizeCode(context.Context, *GetAuthorizeCodeRequest) (*GetAuthorizeCodeResponse, error)
+	mustEmbedUnimplementedOauth2ServiceServer()
+}
+
+// UnimplementedOauth2ServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedOauth2ServiceServer struct{}
+
+func (UnimplementedOauth2ServiceServer) GetAuthorizeCode(context.Context, *GetAuthorizeCodeRequest) (*GetAuthorizeCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeCode not implemented")
+}
+func (UnimplementedOauth2ServiceServer) mustEmbedUnimplementedOauth2ServiceServer() {}
+func (UnimplementedOauth2ServiceServer) testEmbeddedByValue()                       {}
+
+// UnsafeOauth2ServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to Oauth2ServiceServer will
+// result in compilation errors.
+type UnsafeOauth2ServiceServer interface {
+	mustEmbedUnimplementedOauth2ServiceServer()
+}
+
+func RegisterOauth2ServiceServer(s grpc.ServiceRegistrar, srv Oauth2ServiceServer) {
+	// If the following call pancis, it indicates UnimplementedOauth2ServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Oauth2Service_ServiceDesc, srv)
+}
+
+func _Oauth2Service_GetAuthorizeCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAuthorizeCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Oauth2ServiceServer).GetAuthorizeCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Oauth2Service_GetAuthorizeCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Oauth2ServiceServer).GetAuthorizeCode(ctx, req.(*GetAuthorizeCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Oauth2Service_ServiceDesc is the grpc.ServiceDesc for Oauth2Service service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Oauth2Service_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "grpcoauth.v1.Oauth2Service",
+	HandlerType: (*Oauth2ServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetAuthorizeUrl",
-			Handler:    _OauthService_GetAuthorizeUrl_Handler,
+			MethodName: "GetAuthorizeCode",
+			Handler:    _Oauth2Service_GetAuthorizeCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

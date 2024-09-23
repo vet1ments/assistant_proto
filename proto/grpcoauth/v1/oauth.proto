@@ -55,21 +55,7 @@ message CreateOauthUserAppResponse {
   string description = 2;
 }
 
-message GetAuthorizeCodeRequest {
-  LoginType login_type = 1;
-  message UserInfo {
-    string email = 2;
-    string pw = 3;
-  }
-  UserInfo user_info = 4;
-  string code = 5;
-  string state = 6;
-}
 
-message GetAuthorizeCodeResponse {
-  string code = 1;
-  string state = 2;
-}
 message GetTokenRequest {
   grpcoauth.v1.GrantType grant_type = 1;
   string client_id = 2;
@@ -96,14 +82,6 @@ message GetAccessTokenInfoResponse {
   int64 expires_id = 3;
 }
 
-message GetAuthorizeUrlResponse {
-  message AuthorizeUrlInfo {
-    LoginType type = 1;
-    string url = 2;
-  }
-  repeated AuthorizeUrlInfo urls = 3;
-}
-
 service OauthService {
   rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
   rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
@@ -112,12 +90,30 @@ service OauthService {
   rpc CreateOauthAdminApp(CreateOauthAdminAppRequest) returns (CreateOauthAdminAppResponse);
   rpc CreateOauthUserApp(CreateOauthUserAppRequest) returns (CreateOauthUserAppResponse);
 
-  rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse);
   rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
   rpc GetAccessTokenInfo(GetAccessTokenInfoRequest) returns (GetAccessTokenInfoResponse);
+}
 
-  rpc GetAuthorizeUrl(google.protobuf.Empty) returns (GetAuthorizeUrlResponse);
 
+message GetAuthorizeCodeRequest {
+  string client_id = 1;
+  string redirect_uri = 2;
+  string response_type = 3;
+  string state = 4;
+}
+
+message GetAuthorizeCodeResponse {
+  string code = 1;
+  string state = 2;
+}
+
+
+service Oauth2Service {
+    rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse) {
+    option (google.api.http) = {
+      get: "/authorize"
+    };
+  }
 }
 
 

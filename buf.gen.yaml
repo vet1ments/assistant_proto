@@ -22,11 +22,11 @@ plugins:
     out: python
 
   # go
-  - remote: buf.build/grpc-ecosystem/gateway:v2.22.0
+  - remote: buf.build/grpc-ecosystem/gateway
     out: go
     opt:
       - paths=source_relative
-  - remote: buf.build/protocolbuffers/go:v1.34.2
+  - remote: buf.build/protocolbuffers/go
     out: go
     opt:
       - paths=source_relative

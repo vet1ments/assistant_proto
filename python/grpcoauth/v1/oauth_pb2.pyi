@@ -1,6 +1,6 @@
-from grpcoauth.v1 import enums_pb2 as _enums_pb2
-from google.protobuf import empty_pb2 as _empty_pb2
 from google.api import annotations_pb2 as _annotations_pb2
+from google.protobuf import empty_pb2 as _empty_pb2
+from grpcoauth.v1 import enums_pb2 as _enums_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -102,13 +102,13 @@ class GetTokenRequest(_message.Message):
     CODE_FIELD_NUMBER: _ClassVar[int]
     CLIENT_SECRET_FIELD_NUMBER: _ClassVar[int]
     REFRESH_TOKEN_FIELD_NUMBER: _ClassVar[int]
-    grant_type: _enums_pb2.GrantType
+    grant_type: str
     client_id: str
     redirect_uri: str
     code: str
     client_secret: str
     refresh_token: str
-    def __init__(self, grant_type: _Optional[_Union[_enums_pb2.GrantType, str]] = ..., client_id: _Optional[str] = ..., redirect_uri: _Optional[str] = ..., code: _Optional[str] = ..., client_secret: _Optional[str] = ..., refresh_token: _Optional[str] = ...) -> None: ...
+    def __init__(self, grant_type: _Optional[str] = ..., client_id: _Optional[str] = ..., redirect_uri: _Optional[str] = ..., code: _Optional[str] = ..., client_secret: _Optional[str] = ..., refresh_token: _Optional[str] = ...) -> None: ...
 
 class GetTokenResponse(_message.Message):
     __slots__ = ("token_type", "access_token", "expires_id", "refresh_token", "refresh_token_expires_in", "scope")
@@ -118,13 +118,13 @@ class GetTokenResponse(_message.Message):
     REFRESH_TOKEN_FIELD_NUMBER: _ClassVar[int]
     REFRESH_TOKEN_EXPIRES_IN_FIELD_NUMBER: _ClassVar[int]
     SCOPE_FIELD_NUMBER: _ClassVar[int]
-    token_type: _enums_pb2.TokenType
+    token_type: str
     access_token: str
     expires_id: int
     refresh_token: str
     refresh_token_expires_in: int
     scope: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, token_type: _Optional[_Union[_enums_pb2.TokenType, str]] = ..., access_token: _Optional[str] = ..., expires_id: _Optional[int] = ..., refresh_token: _Optional[str] = ..., refresh_token_expires_in: _Optional[int] = ..., scope: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, token_type: _Optional[str] = ..., access_token: _Optional[str] = ..., expires_id: _Optional[int] = ..., refresh_token: _Optional[str] = ..., refresh_token_expires_in: _Optional[int] = ..., scope: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class GetAccessTokenInfoRequest(_message.Message):
     __slots__ = ("token",)

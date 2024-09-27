@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package grpcoauth.v1;
 
-import "grpcoauth/v1/enums.proto";
-import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "grpcoauth/v1/enums.proto";
 
 message OauthApp {
   grpcoauth.v1.RoleType role = 1;
@@ -55,9 +55,9 @@ message CreateOauthUserAppResponse {
   string description = 2;
 }
 
-
 message GetTokenRequest {
-  grpcoauth.v1.GrantType grant_type = 1;
+//  grpcoauth.v1.GrantType grant_type = 1;
+  string grant_type = 1;
   string client_id = 2;
   string redirect_uri = 3;
   string code = 4;
@@ -65,7 +65,7 @@ message GetTokenRequest {
   string refresh_token = 6;
 }
 message GetTokenResponse {
-  grpcoauth.v1.TokenType token_type = 1;
+  string token_type = 1;
   string access_token = 2;
   int64 expires_id = 3;
   string refresh_token = 4;
@@ -82,18 +82,17 @@ message GetAccessTokenInfoResponse {
   int64 expires_id = 3;
 }
 
-service OauthService {
-  rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
-  rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
-  rpc GetOauthAppUserList(GetOauthAppUserListRequest) returns (GetOauthAppUserListResponse);
-
-  rpc CreateOauthAdminApp(CreateOauthAdminAppRequest) returns (CreateOauthAdminAppResponse);
-  rpc CreateOauthUserApp(CreateOauthUserAppRequest) returns (CreateOauthUserAppResponse);
-
-  rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
-  rpc GetAccessTokenInfo(GetAccessTokenInfoRequest) returns (GetAccessTokenInfoResponse);
-}
-
+//service OauthService {
+//  rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
+//  rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
+//  rpc GetOauthAppUserList(GetOauthAppUserListRequest) returns (GetOauthAppUserListResponse);
+//
+//  rpc CreateOauthAdminApp(CreateOauthAdminAppRequest) returns (CreateOauthAdminAppResponse);
+//  rpc CreateOauthUserApp(CreateOauthUserAppRequest) returns (CreateOauthUserAppResponse);
+//
+//  rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
+//  rpc GetAccessTokenInfo(GetAccessTokenInfoRequest) returns (GetAccessTokenInfoResponse);
+//}
 
 message GetAuthorizeCodeRequest {
   string client_id = 1;
@@ -107,24 +106,24 @@ message GetAuthorizeCodeResponse {
   string state = 2;
 }
 
-
 service Oauth2Service {
-    rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse) {
+  rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse) {
+    option (google.api.http) = {get: "/authorize"};
+  }
+  rpc GetToken(GetTokenRequest) returns (GetTokenResponse) {
     option (google.api.http) = {
-      get: "/authorize"
+      post: "/token",
+      body: "*",
     };
   }
 }
 
-
-message CallbackRequest{
+message CallbackRequest {
   string code = 1;
   string state = 2;
 }
 service OauthCallbackService {
   rpc Callback(CallbackRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      get: "/callback/*"
-    };
+    option (google.api.http) = {get: "/callback/*"};
   }
 }

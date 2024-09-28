@@ -34,6 +34,7 @@ jobs:
         run: |
           npx buf dep update
           npx buf generate
+          ls
 
   ts:
     needs: [install-buf]

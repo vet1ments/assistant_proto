@@ -23,9 +23,11 @@ _sym_db = _symbol_database.Default()
 
 
 from buf.validate import validate_pb2 as buf_dot_validate_dot_validate__pb2
+from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17grpcoauth/v1/user.proto\x12\x0cgrpcoauth.v1\x1a\x1b\x62uf/validate/validate.proto\"\xd0\x01\n\x04User\x12%\n\x02id\x18\x01 \x01(\tB\x15\xbaH\x12r\x10\x32\x0e^[a-z0-9]{24}$R\x02id\x12\x1d\n\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x02\x18\x14R\x04name\x12?\n\x0cphone_number\x18\x03 \x01(\tB\x1c\xbaH\x19r\x17\x32\x15^010[0-9]{4}[0-9]{4}$R\x0bphoneNumber\x12#\n\x08nickname\x18\x04 \x01(\tB\x07\xbaH\x04r\x02\x18\x14R\x08nickname\x12\x1c\n\tthumbnail\x18\x05 \x01(\tR\tthumbnail\"7\n\x0eGetUserRequest\x12%\n\x02id\x18\x01 \x01(\tB\x15\xbaH\x12r\x10\x32\x0e^[a-z0-9]{24}$R\x02id\"9\n\x0fGetUserResponse\x12&\n\x04user\x18\x01 \x01(\x0b\x32\x12.grpcoauth.v1.UserR\x04user\";\n\x11\x43reateUserRequest\x12&\n\x04user\x18\x01 \x01(\x0b\x32\x12.grpcoauth.v1.UserR\x04user\"<\n\x12\x43reateUserResponse\x12&\n\x04user\x18\x01 \x01(\x0b\x32\x12.grpcoauth.v1.UserR\x04user\"-\n\x15GetUserByTokenRequest\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token\"@\n\x16GetUserByTokenResponse\x12&\n\x04user\x18\x01 \x01(\x0b\x32\x12.grpcoauth.v1.UserR\x04user\"3\n\x19GetUserListByTokenRequest\x12\x16\n\x06tokens\x18\x01 \x03(\tR\x06tokens\"F\n\x1aGetUserListByTokenResponse\x12(\n\x05users\x18\x01 \x03(\x0b\x32\x12.grpcoauth.v1.UserR\x05users2\xec\x02\n\x0bUserService\x12O\n\nCreateUser\x12\x1f.grpcoauth.v1.CreateUserRequest\x1a .grpcoauth.v1.CreateUserResponse\x12\x46\n\x07GetUser\x12\x1c.grpcoauth.v1.GetUserRequest\x1a\x1d.grpcoauth.v1.GetUserResponse\x12[\n\x0eGetUserByToken\x12#.grpcoauth.v1.GetUserByTokenRequest\x1a$.grpcoauth.v1.GetUserByTokenResponse\x12g\n\x12GetUserListByToken\x12\'.grpcoauth.v1.GetUserListByTokenRequest\x1a(.grpcoauth.v1.GetUserListByTokenResponseB\xaa\x01\n\x10\x63om.grpcoauth.v1B\tUserProtoP\x01Z:github.com/vet1ments/grpcoauth/go/grpcoauth/v1;grpcoauthv1\xa2\x02\x03GXX\xaa\x02\x0cGrpcoauth.V1\xca\x02\x0cGrpcoauth\\V1\xe2\x02\x18Grpcoauth\\V1\\GPBMetadata\xea\x02\rGrpcoauth::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17grpcoauth/v1/user.proto\x12\x0cgrpcoauth.v1\x1a\x1b\x62uf/validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xd0\x01\n\x04User\x12%\n\x02id\x18\x01 \x01(\tB\x15\xbaH\x12r\x10\x32\x0e^[a-z0-9]{24}$R\x02id\x12\x1d\n\x04name\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x02\x18\x14R\x04name\x12?\n\x0cphone_number\x18\x03 \x01(\tB\x1c\xbaH\x19r\x17\x32\x15^010[0-9]{4}[0-9]{4}$R\x0bphoneNumber\x12#\n\x08nickname\x18\x04 \x01(\tB\x07\xbaH\x04r\x02\x18\x14R\x08nickname\x12\x1c\n\tthumbnail\x18\x05 \x01(\tR\tthumbnail\"b\n\x1aGetAccessTokenInfoResponse\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n\nexpires_in\x18\x02 \x01(\x03R\texpiresIn\x12\x15\n\x06\x61pp_id\x18\x03 \x01(\tR\x05\x61ppId\"v\n\x11GetUserMeResponse\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n\x04name\x18\x02 \x01(\tR\x04name\x12!\n\x0cphone_number\x18\x03 \x01(\tR\x0bphoneNumber\x12\x1a\n\x08nickname\x18\x04 \x01(\tR\x08nickname\"$\n\x12UserLogoutResponse\x12\x0e\n\x02id\x18\x01 \x01(\tR\x02id2\xbc\x02\n\x0bUserService\x12w\n\x12GetAccessTokenInfo\x12\x16.google.protobuf.Empty\x1a(.grpcoauth.v1.GetAccessTokenInfoResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/user/access_token_info\x12V\n\tGetUserMe\x12\x16.google.protobuf.Empty\x1a\x1f.grpcoauth.v1.GetUserMeResponse\"\x10\x82\xd3\xe4\x93\x02\n\x12\x08/user/me\x12\\\n\nUserLogout\x12\x16.google.protobuf.Empty\x1a .grpcoauth.v1.UserLogoutResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/user/logoutB\xaa\x01\n\x10\x63om.grpcoauth.v1B\tUserProtoP\x01Z:github.com/vet1ments/grpcoauth/go/grpcoauth/v1;grpcoauthv1\xa2\x02\x03GXX\xaa\x02\x0cGrpcoauth.V1\xca\x02\x0cGrpcoauth\\V1\xe2\x02\x18Grpcoauth\\V1\\GPBMetadata\xea\x02\rGrpcoauth::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -41,26 +43,20 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_USER'].fields_by_name['phone_number']._serialized_options = b'\272H\031r\0272\025^010[0-9]{4}[0-9]{4}$'
   _globals['_USER'].fields_by_name['nickname']._loaded_options = None
   _globals['_USER'].fields_by_name['nickname']._serialized_options = b'\272H\004r\002\030\024'
-  _globals['_GETUSERREQUEST'].fields_by_name['id']._loaded_options = None
-  _globals['_GETUSERREQUEST'].fields_by_name['id']._serialized_options = b'\272H\022r\0202\016^[a-z0-9]{24}$'
-  _globals['_USER']._serialized_start=71
-  _globals['_USER']._serialized_end=279
-  _globals['_GETUSERREQUEST']._serialized_start=281
-  _globals['_GETUSERREQUEST']._serialized_end=336
-  _globals['_GETUSERRESPONSE']._serialized_start=338
-  _globals['_GETUSERRESPONSE']._serialized_end=395
-  _globals['_CREATEUSERREQUEST']._serialized_start=397
-  _globals['_CREATEUSERREQUEST']._serialized_end=456
-  _globals['_CREATEUSERRESPONSE']._serialized_start=458
-  _globals['_CREATEUSERRESPONSE']._serialized_end=518
-  _globals['_GETUSERBYTOKENREQUEST']._serialized_start=520
-  _globals['_GETUSERBYTOKENREQUEST']._serialized_end=565
-  _globals['_GETUSERBYTOKENRESPONSE']._serialized_start=567
-  _globals['_GETUSERBYTOKENRESPONSE']._serialized_end=631
-  _globals['_GETUSERLISTBYTOKENREQUEST']._serialized_start=633
-  _globals['_GETUSERLISTBYTOKENREQUEST']._serialized_end=684
-  _globals['_GETUSERLISTBYTOKENRESPONSE']._serialized_start=686
-  _globals['_GETUSERLISTBYTOKENRESPONSE']._serialized_end=756
-  _globals['_USERSERVICE']._serialized_start=759
-  _globals['_USERSERVICE']._serialized_end=1123
+  _globals['_USERSERVICE'].methods_by_name['GetAccessTokenInfo']._loaded_options = None
+  _globals['_USERSERVICE'].methods_by_name['GetAccessTokenInfo']._serialized_options = b'\202\323\344\223\002\031\022\027/user/access_token_info'
+  _globals['_USERSERVICE'].methods_by_name['GetUserMe']._loaded_options = None
+  _globals['_USERSERVICE'].methods_by_name['GetUserMe']._serialized_options = b'\202\323\344\223\002\n\022\010/user/me'
+  _globals['_USERSERVICE'].methods_by_name['UserLogout']._loaded_options = None
+  _globals['_USERSERVICE'].methods_by_name['UserLogout']._serialized_options = b'\202\323\344\223\002\016\022\014/user/logout'
+  _globals['_USER']._serialized_start=130
+  _globals['_USER']._serialized_end=338
+  _globals['_GETACCESSTOKENINFORESPONSE']._serialized_start=340
+  _globals['_GETACCESSTOKENINFORESPONSE']._serialized_end=438
+  _globals['_GETUSERMERESPONSE']._serialized_start=440
+  _globals['_GETUSERMERESPONSE']._serialized_end=558
+  _globals['_USERLOGOUTRESPONSE']._serialized_start=560
+  _globals['_USERLOGOUTRESPONSE']._serialized_end=596
+  _globals['_USERSERVICE']._serialized_start=599
+  _globals['_USERSERVICE']._serialized_end=915
 # @@protoc_insertion_point(module_scope)

@@ -144,7 +144,7 @@ func RegisterOauth2ServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetAuthorizeCode", runtime.WithHTTPPathPattern("/authorize"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetAuthorizeCode", runtime.WithHTTPPathPattern("/oauth/authorize"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -169,7 +169,7 @@ func RegisterOauth2ServiceHandlerServer(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetToken", runtime.WithHTTPPathPattern("/token"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetToken", runtime.WithHTTPPathPattern("/oauth/token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -268,7 +268,7 @@ func RegisterOauth2ServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetAuthorizeCode", runtime.WithHTTPPathPattern("/authorize"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetAuthorizeCode", runtime.WithHTTPPathPattern("/oauth/authorize"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -290,7 +290,7 @@ func RegisterOauth2ServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetToken", runtime.WithHTTPPathPattern("/token"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/grpcoauth.v1.Oauth2Service/GetToken", runtime.WithHTTPPathPattern("/oauth/token"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -310,9 +310,9 @@ func RegisterOauth2ServiceHandlerClient(ctx context.Context, mux *runtime.ServeM
 }
 
 var (
-	pattern_Oauth2Service_GetAuthorizeCode_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"authorize"}, ""))
+	pattern_Oauth2Service_GetAuthorizeCode_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"oauth", "authorize"}, ""))
 
-	pattern_Oauth2Service_GetToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"token"}, ""))
+	pattern_Oauth2Service_GetToken_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"oauth", "token"}, ""))
 )
 
 var (

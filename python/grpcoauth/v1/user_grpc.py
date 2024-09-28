@@ -10,52 +10,44 @@ if typing.TYPE_CHECKING:
     import grpclib.server
 
 import buf.validate.validate_pb2
+import google.api.annotations_pb2
+import google.protobuf.empty_pb2
 import grpcoauth.v1.user_pb2
 
 
 class UserServiceBase(abc.ABC):
 
     @abc.abstractmethod
-    async def CreateUser(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.CreateUserRequest, grpcoauth.v1.user_pb2.CreateUserResponse]') -> None:
+    async def GetAccessTokenInfo(self, stream: 'grpclib.server.Stream[google.protobuf.empty_pb2.Empty, grpcoauth.v1.user_pb2.GetAccessTokenInfoResponse]') -> None:
         pass
 
     @abc.abstractmethod
-    async def GetUser(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.GetUserRequest, grpcoauth.v1.user_pb2.GetUserResponse]') -> None:
+    async def GetUserMe(self, stream: 'grpclib.server.Stream[google.protobuf.empty_pb2.Empty, grpcoauth.v1.user_pb2.GetUserMeResponse]') -> None:
         pass
 
     @abc.abstractmethod
-    async def GetUserByToken(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.GetUserByTokenRequest, grpcoauth.v1.user_pb2.GetUserByTokenResponse]') -> None:
-        pass
-
-    @abc.abstractmethod
-    async def GetUserListByToken(self, stream: 'grpclib.server.Stream[grpcoauth.v1.user_pb2.GetUserListByTokenRequest, grpcoauth.v1.user_pb2.GetUserListByTokenResponse]') -> None:
+    async def UserLogout(self, stream: 'grpclib.server.Stream[google.protobuf.empty_pb2.Empty, grpcoauth.v1.user_pb2.UserLogoutResponse]') -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/grpcoauth.v1.UserService/CreateUser': grpclib.const.Handler(
-                self.CreateUser,
+            '/grpcoauth.v1.UserService/GetAccessTokenInfo': grpclib.const.Handler(
+                self.GetAccessTokenInfo,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.user_pb2.CreateUserRequest,
-                grpcoauth.v1.user_pb2.CreateUserResponse,
+                google.protobuf.empty_pb2.Empty,
+                grpcoauth.v1.user_pb2.GetAccessTokenInfoResponse,
             ),
-            '/grpcoauth.v1.UserService/GetUser': grpclib.const.Handler(
-                self.GetUser,
+            '/grpcoauth.v1.UserService/GetUserMe': grpclib.const.Handler(
+                self.GetUserMe,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.user_pb2.GetUserRequest,
-                grpcoauth.v1.user_pb2.GetUserResponse,
+                google.protobuf.empty_pb2.Empty,
+                grpcoauth.v1.user_pb2.GetUserMeResponse,
             ),
-            '/grpcoauth.v1.UserService/GetUserByToken': grpclib.const.Handler(
-                self.GetUserByToken,
+            '/grpcoauth.v1.UserService/UserLogout': grpclib.const.Handler(
+                self.UserLogout,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.user_pb2.GetUserByTokenRequest,
-                grpcoauth.v1.user_pb2.GetUserByTokenResponse,
-            ),
-            '/grpcoauth.v1.UserService/GetUserListByToken': grpclib.const.Handler(
-                self.GetUserListByToken,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                grpcoauth.v1.user_pb2.GetUserListByTokenRequest,
-                grpcoauth.v1.user_pb2.GetUserListByTokenResponse,
+                google.protobuf.empty_pb2.Empty,
+                grpcoauth.v1.user_pb2.UserLogoutResponse,
             ),
         }
 
@@ -63,27 +55,21 @@ class UserServiceBase(abc.ABC):
 class UserServiceStub:
 
     def __init__(self, channel: grpclib.client.Channel) -> None:
-        self.CreateUser = grpclib.client.UnaryUnaryMethod(
+        self.GetAccessTokenInfo = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/grpcoauth.v1.UserService/CreateUser',
-            grpcoauth.v1.user_pb2.CreateUserRequest,
-            grpcoauth.v1.user_pb2.CreateUserResponse,
+            '/grpcoauth.v1.UserService/GetAccessTokenInfo',
+            google.protobuf.empty_pb2.Empty,
+            grpcoauth.v1.user_pb2.GetAccessTokenInfoResponse,
         )
-        self.GetUser = grpclib.client.UnaryUnaryMethod(
+        self.GetUserMe = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/grpcoauth.v1.UserService/GetUser',
-            grpcoauth.v1.user_pb2.GetUserRequest,
-            grpcoauth.v1.user_pb2.GetUserResponse,
+            '/grpcoauth.v1.UserService/GetUserMe',
+            google.protobuf.empty_pb2.Empty,
+            grpcoauth.v1.user_pb2.GetUserMeResponse,
         )
-        self.GetUserByToken = grpclib.client.UnaryUnaryMethod(
+        self.UserLogout = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/grpcoauth.v1.UserService/GetUserByToken',
-            grpcoauth.v1.user_pb2.GetUserByTokenRequest,
-            grpcoauth.v1.user_pb2.GetUserByTokenResponse,
-        )
-        self.GetUserListByToken = grpclib.client.UnaryUnaryMethod(
-            channel,
-            '/grpcoauth.v1.UserService/GetUserListByToken',
-            grpcoauth.v1.user_pb2.GetUserListByTokenRequest,
-            grpcoauth.v1.user_pb2.GetUserListByTokenResponse,
+            '/grpcoauth.v1.UserService/UserLogout',
+            google.protobuf.empty_pb2.Empty,
+            grpcoauth.v1.user_pb2.UserLogoutResponse,
         )

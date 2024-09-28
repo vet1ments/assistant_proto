@@ -11,7 +11,6 @@ if typing.TYPE_CHECKING:
 
 import google.api.annotations_pb2
 import google.protobuf.empty_pb2
-import grpcoauth.v1.enums_pb2
 import grpcoauth.v1.oauth_pb2
 
 

@@ -2,6 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from grpcoauth.v1 import user_pb2 as grpcoauth_dot_v1_dot_user__pb2
 
 
@@ -14,50 +15,39 @@ class UserServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.CreateUser = channel.unary_unary(
-                '/grpcoauth.v1.UserService/CreateUser',
-                request_serializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserResponse.FromString,
+        self.GetAccessTokenInfo = channel.unary_unary(
+                '/grpcoauth.v1.UserService/GetAccessTokenInfo',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetAccessTokenInfoResponse.FromString,
                 _registered_method=True)
-        self.GetUser = channel.unary_unary(
-                '/grpcoauth.v1.UserService/GetUser',
-                request_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.FromString,
+        self.GetUserMe = channel.unary_unary(
+                '/grpcoauth.v1.UserService/GetUserMe',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserMeResponse.FromString,
                 _registered_method=True)
-        self.GetUserByToken = channel.unary_unary(
-                '/grpcoauth.v1.UserService/GetUserByToken',
-                request_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserByTokenRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserByTokenResponse.FromString,
-                _registered_method=True)
-        self.GetUserListByToken = channel.unary_unary(
-                '/grpcoauth.v1.UserService/GetUserListByToken',
-                request_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserListByTokenRequest.SerializeToString,
-                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserListByTokenResponse.FromString,
+        self.UserLogout = channel.unary_unary(
+                '/grpcoauth.v1.UserService/UserLogout',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=grpcoauth_dot_v1_dot_user__pb2.UserLogoutResponse.FromString,
                 _registered_method=True)
 
 
 class UserServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def CreateUser(self, request, context):
+    def GetAccessTokenInfo(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetUser(self, request, context):
+    def GetUserMe(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetUserByToken(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetUserListByToken(self, request, context):
+    def UserLogout(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -66,25 +56,20 @@ class UserServiceServicer(object):
 
 def add_UserServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'CreateUser': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateUser,
-                    request_deserializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.CreateUserResponse.SerializeToString,
+            'GetAccessTokenInfo': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAccessTokenInfo,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.GetAccessTokenInfoResponse.SerializeToString,
             ),
-            'GetUser': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetUser,
-                    request_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.SerializeToString,
+            'GetUserMe': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserMe,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserMeResponse.SerializeToString,
             ),
-            'GetUserByToken': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetUserByToken,
-                    request_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserByTokenRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserByTokenResponse.SerializeToString,
-            ),
-            'GetUserListByToken': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetUserListByToken,
-                    request_deserializer=grpcoauth_dot_v1_dot_user__pb2.GetUserListByTokenRequest.FromString,
-                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.GetUserListByTokenResponse.SerializeToString,
+            'UserLogout': grpc.unary_unary_rpc_method_handler(
+                    servicer.UserLogout,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=grpcoauth_dot_v1_dot_user__pb2.UserLogoutResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -98,7 +83,7 @@ class UserService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def CreateUser(request,
+    def GetAccessTokenInfo(request,
             target,
             options=(),
             channel_credentials=None,
@@ -111,9 +96,9 @@ class UserService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/grpcoauth.v1.UserService/CreateUser',
-            grpcoauth_dot_v1_dot_user__pb2.CreateUserRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_user__pb2.CreateUserResponse.FromString,
+            '/grpcoauth.v1.UserService/GetAccessTokenInfo',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            grpcoauth_dot_v1_dot_user__pb2.GetAccessTokenInfoResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -125,7 +110,7 @@ class UserService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetUser(request,
+    def GetUserMe(request,
             target,
             options=(),
             channel_credentials=None,
@@ -138,9 +123,9 @@ class UserService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/grpcoauth.v1.UserService/GetUser',
-            grpcoauth_dot_v1_dot_user__pb2.GetUserRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_user__pb2.GetUserResponse.FromString,
+            '/grpcoauth.v1.UserService/GetUserMe',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            grpcoauth_dot_v1_dot_user__pb2.GetUserMeResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -152,7 +137,7 @@ class UserService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetUserByToken(request,
+    def UserLogout(request,
             target,
             options=(),
             channel_credentials=None,
@@ -165,36 +150,9 @@ class UserService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/grpcoauth.v1.UserService/GetUserByToken',
-            grpcoauth_dot_v1_dot_user__pb2.GetUserByTokenRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_user__pb2.GetUserByTokenResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetUserListByToken(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/grpcoauth.v1.UserService/GetUserListByToken',
-            grpcoauth_dot_v1_dot_user__pb2.GetUserListByTokenRequest.SerializeToString,
-            grpcoauth_dot_v1_dot_user__pb2.GetUserListByTokenResponse.FromString,
+            '/grpcoauth.v1.UserService/UserLogout',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            grpcoauth_dot_v1_dot_user__pb2.UserLogoutResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -3,51 +3,51 @@ syntax = "proto3";
 package grpcoauth.v1;
 
 import "buf/validate/validate.proto";
-
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 
 message User {
   string id = 1 [(buf.validate.field).string.pattern = "^[a-z0-9]{24}$"];
-  string name = 2 [(buf.validate.field).string.min_len = 2, (buf.validate.field).string.max_len = 20];
+  string name = 2 [
+    (buf.validate.field).string.min_len = 2,
+    (buf.validate.field).string.max_len = 20
+  ];
   string phone_number = 3 [(buf.validate.field).string.pattern = "^010[0-9]{4}[0-9]{4}$"];
   string nickname = 4 [(buf.validate.field).string.max_len = 20];
   string thumbnail = 5;
 }
 
-message GetUserRequest {
-  string id = 1 [(buf.validate.field).string.pattern = "^[a-z0-9]{24}$"];
+message GetAccessTokenInfoResponse {
+  string id = 1;
+  int64 expires_in = 2;
+  string app_id = 3;
 }
 
-message GetUserResponse {
-  User user = 1;
+message GetUserMeResponse {
+  string id = 1;
+  string name = 2;
+  string phone_number = 3;
+  string nickname = 4;
 }
 
-message CreateUserRequest {
-  User user = 1;
-}
-
-message CreateUserResponse {
-  User user = 1;
-}
-
-message GetUserByTokenRequest {
-  string token = 1;
-}
-
-message GetUserByTokenResponse {
-  User user = 1;
-}
-
-message GetUserListByTokenRequest {
-  repeated string tokens = 1;
-}
-
-message GetUserListByTokenResponse {
-  repeated User users = 1;
+message UserLogoutResponse {
+  string id = 1;
 }
 
 service UserService {
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
-  rpc GetUser(GetUserRequest) returns (GetUserResponse);
-  rpc GetUserByToken(GetUserByTokenRequest) returns (GetUserByTokenResponse);
-  rpc GetUserListByToken(GetUserListByTokenRequest) returns (GetUserListByTokenResponse);
+  rpc GetAccessTokenInfo(google.protobuf.Empty) returns (GetAccessTokenInfoResponse) {
+    option (google.api.http) = {
+      get: "/user/access_token_info"
+    };
+  }
+  rpc GetUserMe(google.protobuf.Empty) returns (GetUserMeResponse) {
+    option (google.api.http) = {
+      get: "/user/me"
+    };
+  }
+  rpc UserLogout(google.protobuf.Empty) returns (UserLogoutResponse) {
+    option (google.api.http) = {
+      get: '/user/logout'
+    };
+  }
 }

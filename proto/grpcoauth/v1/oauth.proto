@@ -4,56 +4,6 @@ package grpcoauth.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
-import "grpcoauth/v1/enums.proto";
-
-message OauthApp {
-  grpcoauth.v1.RoleType role = 1;
-  string id = 2;
-  string name = 3;
-  string redirect_uri = 4;
-}
-
-message OauthAppUser {
-  string id = 1;
-}
-
-message GetOauthAppTokenInfoRequest {
-  string token = 1;
-}
-
-message GetOauthAppTokenInfoResponse {
-  OauthApp app = 1;
-}
-
-message GetOauthAppUserRequest {
-  string token = 1; // access token
-}
-message GetOauthAppUserResponse {
-  OauthApp user = 1;
-}
-message GetOauthAppUserListRequest {
-  string token = 1; // admin token
-}
-message GetOauthAppUserListResponse {
-  repeated OauthApp users = 1;
-}
-
-message CreateOauthAdminAppRequest {
-  string name = 1;
-  string redirect_uri = 2;
-}
-message CreateOauthAdminAppResponse {
-  grpcoauth.v1.ResponseType response = 1;
-  string description = 2;
-}
-message CreateOauthUserAppRequest {
-  string name = 1;
-  string redirect_uri = 2;
-}
-message CreateOauthUserAppResponse {
-  grpcoauth.v1.ResponseType response = 1;
-  string description = 2;
-}
 
 message GetTokenRequest {
 //  grpcoauth.v1.GrantType grant_type = 1;
@@ -73,27 +23,6 @@ message GetTokenResponse {
   repeated string scope = 6;
 }
 
-message GetAccessTokenInfoRequest {
-  string token = 1;
-}
-message GetAccessTokenInfoResponse {
-  string id = 1; // 앱 회원 아이디
-  string app_id = 2;
-  int64 expires_id = 3;
-}
-
-//service OauthService {
-//  rpc GetOauthAppTokenInfo(GetOauthAppTokenInfoRequest) returns (GetOauthAppTokenInfoResponse);
-//  rpc GetOauthAppUser(GetOauthAppUserRequest) returns (GetOauthAppUserResponse);
-//  rpc GetOauthAppUserList(GetOauthAppUserListRequest) returns (GetOauthAppUserListResponse);
-//
-//  rpc CreateOauthAdminApp(CreateOauthAdminAppRequest) returns (CreateOauthAdminAppResponse);
-//  rpc CreateOauthUserApp(CreateOauthUserAppRequest) returns (CreateOauthUserAppResponse);
-//
-//  rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
-//  rpc GetAccessTokenInfo(GetAccessTokenInfoRequest) returns (GetAccessTokenInfoResponse);
-//}
-
 message GetAuthorizeCodeRequest {
   string client_id = 1;
   string redirect_uri = 2;
@@ -108,11 +37,11 @@ message GetAuthorizeCodeResponse {
 
 service Oauth2Service {
   rpc GetAuthorizeCode(GetAuthorizeCodeRequest) returns (GetAuthorizeCodeResponse) {
-    option (google.api.http) = {get: "/authorize"};
+    option (google.api.http) = {get: "/oauth/authorize"};
   }
   rpc GetToken(GetTokenRequest) returns (GetTokenResponse) {
     option (google.api.http) = {
-      post: "/token",
+      post: "/oauth/token",
       body: "*",
     };
   }

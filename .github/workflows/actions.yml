@@ -5,7 +5,20 @@ on:
     tags:
       - '*'
 jobs:
+  install-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setUp python 3.11
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+      - name: install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install grpclib protobuf
+
   install-buf:
+    needs: [install-python]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout assistant_proto code
@@ -25,34 +38,10 @@ jobs:
       - name: dep update
         run: |
           npx buf dep update
-
-  install-python:
-    runs-on: ubuntu-latest
-    steps:
-      - name: setUp python 3.11
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11'
-      - name: install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install grpclib protobuf
-
-  generate-buf:
-    needs: [install-python, install-buf]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout assistant_proto code
-        uses: actions/checkout@v4
-      - name: generate buf
-        run: |
-          npx buf dep update
           npx buf generate
-          npx buf --version
-          
 
   ts:
-    needs: [generate-buf]
+    needs: [install-buf]
     runs-on: ubuntu-latest
 
     steps:
@@ -78,7 +67,7 @@ jobs:
           git config --unset user.email "vet1ments@naver.com"
           rm -rf ./grpc-oauth-ts
   go:
-    needs: [generate-buf]
+    needs: [install-buf]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout assistant_proto code

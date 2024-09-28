@@ -25,5 +25,11 @@ jobs:
           git config user.name "vet1ments"
           git config user.email "vet1ments@naver.com"
           
-          git remote -v
+          cp ../go/grpcoauth/* ./ 
+          git add .
+          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
+          git push origin master
+          git tag ${{ steps.tag.outputs.TAG_NAME }}
+          git push origin ${{ steps.tag.outputs.TAG_NAME }}
+          git config --unset-all http.https://github.com/.extraheader
           

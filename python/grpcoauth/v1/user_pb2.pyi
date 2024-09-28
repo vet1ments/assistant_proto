@@ -21,6 +21,12 @@ class User(_message.Message):
     thumbnail: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., phone_number: _Optional[str] = ..., nickname: _Optional[str] = ..., thumbnail: _Optional[str] = ...) -> None: ...
 
+class test(_message.Message):
+    __slots__ = ("test",)
+    TEST_FIELD_NUMBER: _ClassVar[int]
+    test: str
+    def __init__(self, test: _Optional[str] = ...) -> None: ...
+
 class GetAccessTokenInfoResponse(_message.Message):
     __slots__ = ("id", "expires_in", "app_id")
     ID_FIELD_NUMBER: _ClassVar[int]

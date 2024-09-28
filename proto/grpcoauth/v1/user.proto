@@ -17,6 +17,9 @@ message User {
   string thumbnail = 5;
 }
 
+message test{
+  string test =1;
+}
 message GetAccessTokenInfoResponse {
   string id = 1;
   int64 expires_in = 2;

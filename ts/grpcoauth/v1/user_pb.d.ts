@@ -39,6 +39,24 @@ export namespace User {
   }
 }
 
+export class test extends jspb.Message {
+  getTest(): string;
+  setTest(value: string): test;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): test.AsObject;
+  static toObject(includeInstance: boolean, msg: test): test.AsObject;
+  static serializeBinaryToWriter(message: test, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): test;
+  static deserializeBinaryFromReader(message: test, reader: jspb.BinaryReader): test;
+}
+
+export namespace test {
+  export type AsObject = {
+    test: string,
+  }
+}
+
 export class GetAccessTokenInfoResponse extends jspb.Message {
   getId(): string;
   setId(value: string): GetAccessTokenInfoResponse;

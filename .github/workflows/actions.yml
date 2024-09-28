@@ -8,6 +8,8 @@ jobs:
   install-buf:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout assistant_proto code
+        uses: actions/checkout@v4
       - name: Set up NodeJS 20.17.0
         uses: actions/setup-node@v2
         with:

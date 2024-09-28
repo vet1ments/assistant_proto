@@ -50,7 +50,6 @@ jobs:
         env:
           TOKEN: ${{secrets.Secret}}
         run: |
-          rm -rf ./grpc-oauth-ts
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
           rm -r ./grpc-oauth-ts/*
           cd grpc-oauth-ts
@@ -68,7 +67,6 @@ jobs:
         env:
           TOKEN: ${{secrets.Secret}}
         run: |
-          rm -rf ./grpc-oauth-go
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-go
           rm -r ./grpc-oauth-go/*
           cd grpc-oauth-go
@@ -91,11 +89,8 @@ jobs:
         env:
           TOKEN: ${{secrets.Secret}}
         run: |
-          rm -rf ./grpc-oauth-python
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-python
-          if [ -d "./grpc-oauth-python" ] && [ "$(ls -A ./grpc-oauth-python)" ]; then
-            rm -r ./grpc-oauth-python/*
-          fi
+          rm -rf ./grpc-oauth-python/*
           cd grpc-oauth-python
           cp -r ../python/grpcoauth/* ./
           

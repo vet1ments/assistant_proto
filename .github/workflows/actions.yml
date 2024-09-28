@@ -18,6 +18,7 @@ jobs:
         run: |
           npm install @bufbuild/protobuf @bufbuild/protoc-gen-es @bufbuild/buf
           npx buf --version
+          npm install
 
   install-python:
     runs-on: ubuntu-latest

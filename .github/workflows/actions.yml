@@ -90,8 +90,7 @@ jobs:
         run: |
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-python
           
-          find grpc-oauth-python -mindepth 1 -not -path "grpc-oauth-python/.gitflow" -not -path "grpc-oauth-python/.gitflow/*" -exec  rm -rf {} +
-          ls
+          find grpc-oauth-python -mindepth 1 -not -path "grpc-oauth-python/.gitflow" -not -path "grpc-oauth-python/.gitflow/*" -not -path "grpc-oauth-python/.git" -not -path "grpc-oauth-python/.git/*" -exec  rm -rf {} +
           
           cd grpc-oauth-python
           ls

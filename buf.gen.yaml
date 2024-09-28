@@ -33,9 +33,9 @@ plugins:
     opt:
       - paths=source_relative
 
-  - local: protoc-gen-es
-    out: ts
-    opt: target=ts
+#  - local: protoc-gen-es
+#    out: ts
+#    opt: target=ts
 #  - remote: buf.build/bufbuild/es:v2.1.0
 #    out: ts
 #    opt: target=ts

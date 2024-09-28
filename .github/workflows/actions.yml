@@ -47,6 +47,7 @@ jobs:
         run: |
           npx buf dep update
           npx buf generate
+          npx buf --version
           
 
   ts:

@@ -34,65 +34,51 @@ jobs:
         run: |
           npx buf dep update
           npx buf generate
-          ls
 
-  ts:
-    needs: [install-buf]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Add remote-url
-        env:
-          TOKEN: ${{secrets.Secret}}
+      - name: git config
         run: |
-          ls
-#          rm -rf ./grpc-oauth-ts
-#          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
-#          cd grpc-oauth-ts
-#          git config user.name "vet1ments"
-#          git config user.email "vet1ments@naver.com"
-#
-#          cp  -r ../ts/* ./
-#          git add .
-#          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
-#          git push origin master
-#          git tag ${{ steps.tag.outputs.TAG_NAME }}
-#          git push origin ${{ steps.tag.outputs.TAG_NAME }}
-#          git config --unset user.name "vet1ments"
-#          git config --unset user.email "vet1ments@naver.com"
-#          rm -rf ./grpc-oauth-ts
-  go:
-    needs: [install-buf]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout assistant_proto code
-        uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '>=1.23.0'
+          git config user.name "vet1ments"
+          git config user.email "vet1ments@naver.com"
 
-      - name: Extract tag name
-        id: tag
-        run: echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+      - name: update ts
+        run: |
+          rm -rf ./grpc-oauth-ts
+          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
+          cd grpc-oauth-ts
+          cp  -r ../ts/* ./
+          git add .
+          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
+          git push origin master
+          git tag ${{ steps.tag.outputs.TAG_NAME }}
+          git push origin ${{ steps.tag.outputs.TAG_NAME }}
+          cd ..
+          rm -rf ./grpc-oauth-ts
 
-      - name: Add remote-url
-        env:
-          TOKEN: ${{secrets.Secret}}
+      - name: update go
         run: |
           rm -rf ./grpc-oauth-go
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-go
           cd grpc-oauth-go
           git config user.name "vet1ments"
           git config user.email "vet1ments@naver.com"
-          
+
           cp -r ../go/grpcoauth/* ./ 
           rm go.mod
           rm go.sum
-          
+
           go mod init github.com/vet1ments/grpc-oauth-go
           go mod tidy
-          
-          
+
+
+          git add .
+          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
+          git push origin master
+          git tag ${{ steps.tag.outputs.TAG_NAME }}
+          git push origin ${{ steps.tag.outputs.TAG_NAME }}
+          git config --unset user.name "vet1ments"
+          git config --unset user.email "vet1ments@naver.com"
+          rm -rf ./grpc-oauth-go
+ 
           git add .
           git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
           git push origin master

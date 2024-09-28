@@ -40,8 +40,9 @@ plugins:
 #      - js_out=import_style=commonjs
 #      - import_style=typescript
 #      - mode=grpcwebtext
-  - remote: buf.build/bufbuild/es:v2.1.0
+  - local: protoc-gen-es
     out: ts
+    opt: target=ts
 
 
 

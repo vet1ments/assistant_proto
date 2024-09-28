@@ -25,6 +25,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install @bufbuild/protobuf @bufbuild/protoc-gen-es @bufbuild/buf
+          npx buf dep update
           npx buf generate
 
       - name: Add remote-url

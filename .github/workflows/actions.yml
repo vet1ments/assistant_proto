@@ -93,7 +93,9 @@ jobs:
         run: |
           rm -rf ./grpc-oauth-python
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-python
-          rm -r ./grpc-oauth-python/*
+          if [ -d "./grpc-oauth-python" ] && [ "$(ls -A ./grpc-oauth-python)" ]; then
+            rm -r ./grpc-oauth-python/*
+          fi
           cd grpc-oauth-python
           cp -r ../python/grpcoauth/* ./
           

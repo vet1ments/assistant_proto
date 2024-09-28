@@ -1,0 +1,29 @@
+name: push-grpc-go
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout assistant_proto code
+        uses: actions/checkout@v3
+
+      - name: Extract tag name
+        id: tag
+        run: echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+
+      - name: Add remote-url
+        env:
+          TOKEN: ${{secrets.Secret}}
+        run: |
+          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-go
+          cd grpc-oauth-go
+          git config user.name "vet1ments"
+          git config user.email "vet1ments@naver.com"
+          
+          git remote -v
+          

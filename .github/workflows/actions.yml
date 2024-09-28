@@ -46,21 +46,21 @@ jobs:
           TOKEN: ${{secrets.Secret}}
         run: |
           ls
-          rm -rf ./grpc-oauth-ts
-          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
-          cd grpc-oauth-ts
-          git config user.name "vet1ments"
-          git config user.email "vet1ments@naver.com"
-
-          cp  -r ../ts/* ./ 
-          git add .
-          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
-          git push origin master
-          git tag ${{ steps.tag.outputs.TAG_NAME }}
-          git push origin ${{ steps.tag.outputs.TAG_NAME }}
-          git config --unset user.name "vet1ments"
-          git config --unset user.email "vet1ments@naver.com"
-          rm -rf ./grpc-oauth-ts
+#          rm -rf ./grpc-oauth-ts
+#          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
+#          cd grpc-oauth-ts
+#          git config user.name "vet1ments"
+#          git config user.email "vet1ments@naver.com"
+#
+#          cp  -r ../ts/* ./
+#          git add .
+#          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
+#          git push origin master
+#          git tag ${{ steps.tag.outputs.TAG_NAME }}
+#          git push origin ${{ steps.tag.outputs.TAG_NAME }}
+#          git config --unset user.name "vet1ments"
+#          git config --unset user.email "vet1ments@naver.com"
+#          rm -rf ./grpc-oauth-ts
   go:
     needs: [install-buf]
     runs-on: ubuntu-latest

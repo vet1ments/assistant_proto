@@ -115,9 +115,11 @@ jobs:
           )
           EOF
           
+          
+          
           python -m pip freeze > requirements.txt
           sed -i "s/{{VERSION_PLACEHOLDER}}/$VERSION/g" setup.py
-
+          find -type d -not -path "./.git" -not -path "./.git/*" -not -path "./.github" -not -path "./.github/*" -exec touch {}/__init__.py \;
           
           git add .
           git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"

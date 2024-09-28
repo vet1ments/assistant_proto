@@ -36,9 +36,9 @@ plugins:
 #  - local: protoc-gen-es
 #    out: ts
 #    opt: target=ts
-#  - remote: buf.build/bufbuild/es:v2.1.0
-#    out: ts
-#    opt: target=ts
+  - remote: buf.build/bufbuild/es:v2.1.0
+    out: ts
+    opt: target=ts
 
   - remote: buf.build/connectrpc/es:v1.5.0
     out: ts

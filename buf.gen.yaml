@@ -4,8 +4,6 @@ managed:
   override:
     - file_option: go_package_prefix
       value: github.com/vet1ments/grpcoauth/go
-    - file_option: python_package
-      value: src
   disable:
     - file_option: go_package_prefix
       module: buf.build/bufbuild/protovalidate

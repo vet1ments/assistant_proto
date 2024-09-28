@@ -26,7 +26,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install @bufbuild/protobuf @bufbuild/protoc-gen-es @bufbuild/buf
+          npm install --save-dev @bufbuild/buf @connectrpc/protoc-gen-connect-es@"^1.0.0" @bufbuild/protoc-gen-es@"^1.0.0"
+          npm install @connectrpc/connect@"^1.0.0" @connectrpc/connect-web@"^1.0.0" @bufbuild/protobuf@"^1.0.0"
           npx buf --version
           npm install
 

@@ -36,12 +36,14 @@ plugins:
 #  - local: protoc-gen-es
 #    out: ts
 #    opt: target=ts
-  - remote: buf.build/bufbuild/es:v2.1.0
+  # This will invoke protoc-gen-es and write output to src/gen
+  - local: protoc-gen-es
     out: ts
     opt: target=ts
-
-  - remote: buf.build/connectrpc/es:v1.5.0
+  # This will invoke protoc-gen-connect-es
+  - local: protoc-gen-connect-es
     out: ts
+    # Add more plugin options here
     opt: target=ts
 
 

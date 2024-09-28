@@ -21,6 +21,8 @@ jobs:
           npm install @bufbuild/protobuf @bufbuild/protoc-gen-es @bufbuild/buf
           npx buf --version
           npm install
+
+      - name: dep update
           npx buf dep update
 
   install-python:
@@ -39,6 +41,8 @@ jobs:
     needs: [install-python, install-buf]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout assistant_proto code
+        uses: actions/checkout@v4
       - name: generate buf
         run: |
           npx buf dep update

@@ -33,7 +33,7 @@ jobs:
       - name: dep update
         run: |
           npx buf dep update
-          npx buf generate
+          npx buf generate --include-imports
 
       - name: git config
         run: |

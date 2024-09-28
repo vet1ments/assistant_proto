@@ -16,6 +16,17 @@ jobs:
         id: tag
         run: echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
 
+      - name: Set up NodeJS 20.17.0
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20.17.0
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependencies
+        run: |
+          npm install @bufbuild/protobuf @bufbuild/protoc-gen-es @bufbuild/buf
+          npx buf generate
+
       - name: Add remote-url
         env:
           TOKEN: ${{secrets.Secret}}
@@ -35,6 +46,36 @@ jobs:
           git config --unset user.name "vet1ments"
           git config --unset user.email "vet1ments@naver.com"
           rm -rf ./grpc-oauth-ts
+  #  ts:
+  #    runs-on: ubuntu-latest
+  #
+  #    steps:
+  #      - name: Checkout assistant_proto code
+  #        uses: actions/checkout@v4
+  #
+  #      - name: Extract tag name
+  #        id: tag
+  #        run: echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+  #
+  #      - name: Add remote-url
+  #        env:
+  #          TOKEN: ${{secrets.Secret}}
+  #        run: |
+  #          rm -rf ./grpc-oauth-ts
+  #          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
+  #          cd grpc-oauth-ts
+  #          git config user.name "vet1ments"
+  #          git config user.email "vet1ments@naver.com"
+  #
+  #          cp  -r ../ts/* ./
+  #          git add .
+  #          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
+  #          git push origin master
+  #          git tag ${{ steps.tag.outputs.TAG_NAME }}
+  #          git push origin ${{ steps.tag.outputs.TAG_NAME }}
+  #          git config --unset user.name "vet1ments"
+  #          git config --unset user.email "vet1ments@naver.com"
+  #          rm -rf ./grpc-oauth-ts
   go:
     runs-on: ubuntu-latest
 

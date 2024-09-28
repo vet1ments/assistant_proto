@@ -25,7 +25,7 @@ jobs:
           git config user.name "vet1ments"
           git config user.email "vet1ments@naver.com"
           
-          cp ../go/grpcoauth/* ./ 
+          cp -r ../go/grpcoauth/* ./ 
           git add .
           git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
           git push origin master

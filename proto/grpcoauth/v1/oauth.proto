@@ -4,9 +4,17 @@ package grpcoauth.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
+import "grpcoauth/v1/enums.proto";
+
+message OauthApp {
+  grpcoauth.v1.RoleType role = 1;
+  string id = 2;
+  string name = 3;
+  string redirect_uri = 4;
+}
 
 message GetTokenRequest {
-//  grpcoauth.v1.GrantType grant_type = 1;
+  //  grpcoauth.v1.GrantType grant_type = 1;
   string grant_type = 1;
   string client_id = 2;
   string redirect_uri = 3;

@@ -1,11 +1,24 @@
 from google.api import annotations_pb2 as _annotations_pb2
 from google.protobuf import empty_pb2 as _empty_pb2
+from grpcoauth.v1 import enums_pb2 as _enums_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Optional
+from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
+
+class OauthApp(_message.Message):
+    __slots__ = ("role", "id", "name", "redirect_uri")
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    REDIRECT_URI_FIELD_NUMBER: _ClassVar[int]
+    role: _enums_pb2.RoleType
+    id: str
+    name: str
+    redirect_uri: str
+    def __init__(self, role: _Optional[_Union[_enums_pb2.RoleType, str]] = ..., id: _Optional[str] = ..., name: _Optional[str] = ..., redirect_uri: _Optional[str] = ...) -> None: ...
 
 class GetTokenRequest(_message.Message):
     __slots__ = ("grant_type", "client_id", "redirect_uri", "code", "client_secret", "refresh_token")

@@ -83,14 +83,12 @@ jobs:
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
           rm -rf ./grpc-oauth-go
-
       - name: update py
         continue-on-error: true
         env:
           TOKEN: ${{secrets.Secret}}
         run: |
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-python
-#          rm -rf ./grpc-oauth-python/*
           find ./grpc-oauth-python -path ./grpc-oauth-python/.github -prune -o -exec rm -rf {} +
           cd grpc-oauth-python
           cp -r ../python/* ./

@@ -29,7 +29,7 @@ type User struct {
 	unknownFields protoimpl.UnknownFields
 
 	Id          string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` //we
 	PhoneNumber string `protobuf:"bytes,3,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
 	Nickname    string `protobuf:"bytes,4,opt,name=nickname,proto3" json:"nickname,omitempty"`
 	Thumbnail   string `protobuf:"bytes,5,opt,name=thumbnail,proto3" json:"thumbnail,omitempty"`

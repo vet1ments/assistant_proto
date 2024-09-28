@@ -20,6 +20,7 @@ jobs:
         env:
           TOKEN: ${{secrets.Secret}}
         run: |
+          rm -rf ./grpc-oauth-ts
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
           cd grpc-oauth-ts
           git config user.name "vet1ments"
@@ -31,6 +32,9 @@ jobs:
           git push origin master
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
+          git config --unset user.name "vet1ments"
+          git config --unset user.email "vet1ments@naver.com"
+          rm -rf ./grpc-oauth-ts
   go:
     runs-on: ubuntu-latest
 
@@ -49,6 +53,7 @@ jobs:
         env:
           TOKEN: ${{secrets.Secret}}
         run: |
+          rm -rf ./grpc-oauth-go
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-go
           cd grpc-oauth-go
           git config user.name "vet1ments"
@@ -64,4 +69,7 @@ jobs:
           git push origin master
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
+          git config --unset user.name "vet1ments"
+          git config --unset user.email "vet1ments@naver.com"
+          rm -rf ./grpc-oauth-go
           

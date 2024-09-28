@@ -33,14 +33,14 @@ plugins:
     opt:
       - paths=source_relative
 
-  # es / js,ts
-#  - remote: buf.build/grpc/web:v1.5.0
-#    out: ts
-#    opt:
-#      - js_out=import_style=commonjs
-#      - import_style=typescript
-#      - mode=grpcwebtext
   - local: protoc-gen-es
+    out: ts
+    opt: target=ts
+#  - remote: buf.build/bufbuild/es:v2.1.0
+#    out: ts
+#    opt: target=ts
+
+  - remote: buf.build/connectrpc/es:v1.5.0
     out: ts
     opt: target=ts
 

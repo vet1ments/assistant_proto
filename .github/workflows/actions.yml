@@ -89,7 +89,7 @@ jobs:
           TOKEN: ${{secrets.Secret}}
         run: |
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-python
-          find ./grpc-oauth-python -path ./grpc-oauth-python/.github -prune -o -exec rm -rf {} +
+          find grpc-oauth-python -mindepth 1 -not -path "grpc-oauth-python/.gitflow" -not -path "grpc-oauth-python/.gitflow/*" -exec  rm -rf {} +
           cd grpc-oauth-python
           cp -r ../python/* ./
           

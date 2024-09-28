@@ -45,7 +45,6 @@ jobs:
         uses: actions/checkout@v4
       - name: generate buf
         run: |
-          npx buf dep update
           npx buf generate
           
 

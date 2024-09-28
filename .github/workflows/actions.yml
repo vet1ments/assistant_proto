@@ -92,7 +92,7 @@ jobs:
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-python
           rm -rf ./grpc-oauth-python/*
           cd grpc-oauth-python
-          cp -r ../python/grpcoauth/* ./
+          cp -r ../python/* ./
           
           git add .
           git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"

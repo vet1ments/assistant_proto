@@ -31,5 +31,4 @@ jobs:
           git push origin master
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
-          git config --unset-all http.https://github.com/.extraheader
           

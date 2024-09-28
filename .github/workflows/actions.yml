@@ -41,6 +41,10 @@ jobs:
           git config --global user.name "vet1ments"
           git config --global user.email "vet1ments@naver.com"
 
+      - name: Extract tag name
+        id: tag
+        run: echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+
       - name: update ts
         env:
           TOKEN: ${{secrets.Secret}}
@@ -66,8 +70,6 @@ jobs:
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-go
           rm -r ./grpc-oauth-go/*
           cd grpc-oauth-go
-          git config user.name "vet1ments"
-          git config user.email "vet1ments@naver.com"
 
           cp -r ../go/grpcoauth/* ./ 
 
@@ -80,15 +82,21 @@ jobs:
           git push origin master
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
-          git config --unset user.name "vet1ments"
-          git config --unset user.email "vet1ments@naver.com"
           rm -rf ./grpc-oauth-go
+
+      - name: update py
+        env:
+          TOKEN: ${{secrets.Secret}}
+        run: |
+          rm -rf ./grpc-oauth-python
+          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-python
+          rm -r ./grpc-oauth-python/*
+          cd grpc-oauth-python
+          cp -r ../python/grpcoauth/* ./
           
           git add .
           git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
           git push origin master
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
-          git config --unset user.name "vet1ments"
-          git config --unset user.email "vet1ments@naver.com"
-          rm -rf ./grpc-oauth-go
+          rm -rf ./grpc-oauth-python

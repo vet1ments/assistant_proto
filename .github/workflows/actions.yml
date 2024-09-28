@@ -16,6 +16,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          npm install npx -g
           npm install @bufbuild/protobuf @bufbuild/protoc-gen-es @bufbuild/buf
 
   install-python:

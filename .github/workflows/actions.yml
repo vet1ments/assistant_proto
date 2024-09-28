@@ -16,8 +16,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install npx -g
           npm install @bufbuild/protobuf @bufbuild/protoc-gen-es @bufbuild/buf
+          npx buf --version
 
   install-python:
     runs-on: ubuntu-latest

@@ -23,7 +23,7 @@ const (
 type GrantType int32
 
 const (
-	GrantType_GRANT_TYPE_UNSPECIFIED        GrantType = 0 // 기본값
+	GrantType_GRANT_TYPE_UNSPECIFIED        GrantType = 0 // 기본값wef
 	GrantType_GRANT_TYPE_AUTHORIZATION_CODE GrantType = 1
 	GrantType_GRANT_TYPE_REFRESH_TOKEN      GrantType = 2
 )

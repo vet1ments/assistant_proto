@@ -5,7 +5,33 @@ on:
     tags:
       - '*'
 jobs:
-  build:
+  ts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout assistant_proto code
+        uses: actions/checkout@v4
+
+      - name: Extract tag name
+        id: tag
+        run: echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+
+      - name: Add remote-url
+        env:
+          TOKEN: ${{secrets.Secret}}
+        run: |
+          git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
+          cd grpc-oauth-ts
+          git config user.name "vet1ments"
+          git config user.email "vet1ments@naver.com"
+
+          cp -r ../ts/grpcoauth/* ./ 
+          git add .
+          git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
+          git push origin master
+          git tag ${{ steps.tag.outputs.TAG_NAME }}
+          git push origin ${{ steps.tag.outputs.TAG_NAME }}
+  go:
     runs-on: ubuntu-latest
 
     steps:

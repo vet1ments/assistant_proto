@@ -111,20 +111,20 @@ class GetTokenRequest(_message.Message):
     def __init__(self, grant_type: _Optional[str] = ..., client_id: _Optional[str] = ..., redirect_uri: _Optional[str] = ..., code: _Optional[str] = ..., client_secret: _Optional[str] = ..., refresh_token: _Optional[str] = ...) -> None: ...
 
 class GetTokenResponse(_message.Message):
-    __slots__ = ("token_type", "access_token", "expires_id", "refresh_token", "refresh_token_expires_in", "scope")
+    __slots__ = ("token_type", "access_token", "expires_in", "refresh_token", "refresh_token_expires_in", "scope")
     TOKEN_TYPE_FIELD_NUMBER: _ClassVar[int]
     ACCESS_TOKEN_FIELD_NUMBER: _ClassVar[int]
-    EXPIRES_ID_FIELD_NUMBER: _ClassVar[int]
+    EXPIRES_IN_FIELD_NUMBER: _ClassVar[int]
     REFRESH_TOKEN_FIELD_NUMBER: _ClassVar[int]
     REFRESH_TOKEN_EXPIRES_IN_FIELD_NUMBER: _ClassVar[int]
     SCOPE_FIELD_NUMBER: _ClassVar[int]
     token_type: str
     access_token: str
-    expires_id: int
+    expires_in: int
     refresh_token: str
     refresh_token_expires_in: int
     scope: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, token_type: _Optional[str] = ..., access_token: _Optional[str] = ..., expires_id: _Optional[int] = ..., refresh_token: _Optional[str] = ..., refresh_token_expires_in: _Optional[int] = ..., scope: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, token_type: _Optional[str] = ..., access_token: _Optional[str] = ..., expires_in: _Optional[int] = ..., refresh_token: _Optional[str] = ..., refresh_token_expires_in: _Optional[int] = ..., scope: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class GetAccessTokenInfoRequest(_message.Message):
     __slots__ = ("token",)

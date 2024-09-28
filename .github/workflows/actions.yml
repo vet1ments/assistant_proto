@@ -37,8 +37,8 @@ jobs:
 
       - name: git config
         run: |
-          git config user.name "vet1ments"
-          git config user.email "vet1ments@naver.com"
+          git config --global user.name "vet1ments"
+          git config --global user.email "vet1ments@naver.com"
 
       - name: update ts
         run: |

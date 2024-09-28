@@ -94,6 +94,25 @@ jobs:
           cd grpc-oauth-python
           cp -r ../python/* ./
           
+          VERSION=${{ steps.tag.outputs.TAG_NAME }}
+          VERSION=${VERSION#v}
+          touch setup.py
+          cat > setup.py << EOF
+          from setuptools import find_packages, setup
+          setup(
+          name="grpc-oauth-vet1ments,
+          version="{{VERSION_PLACEHOLDER}}",
+          description="assistant proto",
+          author="vet1ments",
+          author_email="https://github.com/vet1ments/grpc-oauth-python.git",
+          packages=find_packages(exclude=[]),
+          python_requires=">=3"
+          )
+          EOF
+          
+          sed -i "s/{{VERSION_PLACEHOLDER}}/$VERSION/g" setup.py
+
+          
           git add .
           git commit -m "${{ steps.tag.outputs.TAG_NAME }} update"
           git push origin master

@@ -31,6 +31,7 @@ jobs:
           python -m pip install grpclib protobuf
 
   generate-buf:
+    needs: [install-python, install-buf]
     runs-on: ubuntu-latest
     steps:
       - name: generate buf
@@ -40,7 +41,7 @@ jobs:
           
 
   ts:
-    needs: [install-buf, install-python, generate-buf]
+    needs: [generate-buf]
     runs-on: ubuntu-latest
 
     steps:
@@ -66,7 +67,7 @@ jobs:
           git config --unset user.email "vet1ments@naver.com"
           rm -rf ./grpc-oauth-ts
   go:
-    needs: [install-buf, install-python, generate-buf]
+    needs: [generate-buf]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout assistant_proto code

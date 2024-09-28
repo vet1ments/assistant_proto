@@ -23,6 +23,7 @@ jobs:
           npm install
 
       - name: dep update
+        run: |
           npx buf dep update
 
   install-python:

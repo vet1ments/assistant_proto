@@ -47,6 +47,7 @@ jobs:
         env:
           TOKEN: ${{secrets.Secret}}
         run: |
+          ls
           rm -rf ./grpc-oauth-ts
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-ts
           cd grpc-oauth-ts

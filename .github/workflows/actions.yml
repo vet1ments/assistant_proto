@@ -94,6 +94,7 @@ jobs:
           ls
           
           cd grpc-oauth-python
+          ls
           cp -r ../python/* ./
           
           VERSION=${{ steps.tag.outputs.TAG_NAME }}

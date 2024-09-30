@@ -55,7 +55,7 @@ service UserService {
       get: '/user/logout'
     };
   }
-  rpc GetUserList(google.protobuf.Empty) returns (GetUserListResponse) {
+  rpc GetUserList(GetUserListRequest) returns (GetUserListResponse) {
     option (google.api.http) = {
       get: "/users"
     };

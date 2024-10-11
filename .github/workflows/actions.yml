@@ -83,7 +83,11 @@ jobs:
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
           rm -rf ./grpc-oauth-go
-          
+      - name: update go 2
+        continue-on-error: true
+        env:
+          TOKEN: ${{secrets.Secret}}
+        run: |
           git clone https://user:$TOKEN@github.com/vet1ments/oauth-app
           rm -rf ./oauth-app/*
           cd oauth-app
@@ -100,7 +104,6 @@ jobs:
           git tag ${{ steps.tag.outputs.TAG_NAME }}
           git push origin ${{ steps.tag.outputs.TAG_NAME }}
           rm -rf ./oauth-app
-
       - name: update py
         continue-on-error: true
         env:

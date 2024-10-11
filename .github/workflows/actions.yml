@@ -43,7 +43,9 @@ jobs:
 
       - name: Extract tag name
         id: tag
-        run: echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+        run: |
+          echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+          echo TAG_NAME=${GITHUB_REF#refs/tags/} >> $GITHUB_OUTPUT
 
       - name: update ts
         continue-on-error: true

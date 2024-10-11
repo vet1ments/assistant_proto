@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package oauthapp.v1;
+
+import "google/api/httpbody.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "grpcoauth/v1/enums.proto";
+
+message LoginRequest {
+  string id = 1;
+  string pw = 2;
+}
+
+service LoginService {
+  rpc Login(LoginRequest) returns (google.api.HttpBody) {
+    option (google.api.http) = {
+      get: "/login"
+      body: "*"
+    };
+  }
+}
+
+message CallbackRequest {
+  string code = 1;
+  string state = 2;
+
+}
+service SocialCallbackService {
+  rpc Callback(CallbackRequest) returns (google.api.HttpBody) {
+    option (google.api.http) = {get: "/callback/*"};
+  }
+}

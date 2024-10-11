@@ -14,7 +14,6 @@ message OauthApp {
 }
 
 message GetTokenRequest {
-  //  grpcoauth.v1.GrantType grant_type = 1;fwewwer
   string grant_type = 1;
   string client_id = 2;
   string redirect_uri = 3;

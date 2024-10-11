@@ -42,7 +42,7 @@ message GetUserListRequest {
 service UserService {
   rpc GetAccessTokenInfo(google.protobuf.Empty) returns (GetAccessTokenInfoResponse) {
     option (google.api.http) = {
-      get: "/user/access_token_info"
+      get: "/user/access_token_info",
     };
   }
   rpc GetUserMe(google.protobuf.Empty) returns (GetUserMeResponse) {

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package oauthapp.v1;
+
+
+message GetTokenRequest {
+  string state = 1;
+}
+
+message GetTokenResponse {
+  string access_token = 1;
+  int64 expires_in = 2;
+  string refresh_token = 3;
+  int64 refresh_token_expires_in = 4;
+}
+
+message GetTokenInfoRequest {
+  string token = 1;
+}
+message GetTokenInfoResponse {
+
+}
+
+service TokeService {
+  rpc GetToken(GetTokenRequest) returns (GetTokenResponse);
+  rpc GetTokenInfo(GetTokenInfoRequest) returns (GetTokenInfoResponse);
+}

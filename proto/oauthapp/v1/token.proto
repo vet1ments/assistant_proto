@@ -18,7 +18,7 @@ message GetTokenInfoRequest {
   string token = 1;
 }
 message GetTokenInfoResponse {
-
+  string token = 2;
 }
 
 service TokeService {

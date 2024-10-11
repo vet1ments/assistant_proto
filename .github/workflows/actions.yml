@@ -68,7 +68,7 @@ jobs:
           TOKEN: ${{secrets.Secret}}
         run: |
           git clone https://user:$TOKEN@github.com/vet1ments/grpc-oauth-go
-          rm -r ./grpc-oauth-go/*
+          rm -rf ./grpc-oauth-go/*
           cd grpc-oauth-go
 
           cp -r ../go/grpcoauth/* ./ 
@@ -85,7 +85,7 @@ jobs:
           rm -rf ./grpc-oauth-go
           
           git clone https://user:$TOKEN@github.com/vet1ments/oauth-app
-          rm -r ./oauth-app/*
+          rm -rf ./oauth-app/*
           cd oauth-app
 
           cp -r ../go/oauthapp/* ./ 

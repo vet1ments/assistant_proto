@@ -4,6 +4,7 @@ package oauthapp.v1;
 
 import "google/api/httpbody.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 
 message GetLoginPageRequest {
   string continue = 1;
@@ -31,6 +32,23 @@ service LoginService {
       body: "*"
     };
   }
+
+  // buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  // buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+  rpc GetLogoutPage(google.protobuf.Empty) returns (google.api.HttpBody) {
+    option (google.api.http) = {
+      get :"/logout"
+    };
+  }
+  // buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+  // buf:lint:ignore RPC_RESPONSE_STANDARD_NAME
+  rpc Logout(google.protobuf.Empty) returns (google.api.HttpBody) {
+    option (google.api.http) = {
+      post: "/logout",
+      body: "*"
+    };
+  }
+
 }
 
 message CallbackRequest {

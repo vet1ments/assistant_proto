@@ -30,9 +30,6 @@ service LoginService {
     option (google.api.http) = {
       post: "/login"
       body: "*"
-      additional_bindings: {
-        get: "/login"
-      }
     };
   }
 
@@ -49,9 +46,6 @@ service LoginService {
     option (google.api.http) = {
       post: "/logout",
       body: "*"
-      additional_bindings: {
-        get: "/logout"
-      }
     };
   }
 
